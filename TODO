@@ -1,0 +1,3 @@
+Speed up nextpivot by not recalculating determinant. See email from Jon Lee - David Haws 3/11/09
+
+Extend boundary calculation beyond d=2. Will require more sophisticated approach than before. - David Haws 3/11/09

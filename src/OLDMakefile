@@ -1,0 +1,44 @@
+CC = g++
+
+LIB = -lgmp -lgmpxx
+
+all: testmatrix matroidtest graphtest genrandmo
+
+testmatrix: testmatrix.o matrix.o
+	$(CC) $(CFLAGS) $(LIB) -Wall testmatrix.o matrix.o -o testmatrix
+
+matrix.o: matrix.cpp matrix.h
+	$(CC) $(CFLAGS) -Wall -c matrix.cpp
+
+graph.o: graph.h graph.cpp matrix.o
+	$(CC) $(CFLAGS) -Wall -c graph.cpp
+
+testmatrix.o: testmatrix.cpp mathprog.h matroid.h matrix.h graph.h
+	$(CC) $(CFLAGS) -Wall -c testmatrix.cpp
+
+matroid.o: matroid.cpp matroid.h matrix.o graph.o
+	$(CC) $(CFLAGS) -Wall -c matroid.cpp
+
+matroidtest: matroidtest.o matroid.o matrix.o mathprog.o graph.o
+	$(CC) $(CFLAGS) $(LIB) -Wall matroidtest.o matrix.o matroid.o graph.o mathprog.o -o matroidtest
+
+matroidtest.o: matroidtest.cpp mathprog.h matroid.h matrix.h graph.h
+	$(CC) $(CFLAGS) -Wall -c matroidtest.cpp 
+
+mathprog.o: mathprog.cpp mathprog.h matroid.cpp matroid.h matrix.cpp matrix.h graph.cpp graph.h
+	$(CC) $(CFLAGS) -Wall -c mathprog.cpp
+
+graphtest.o: graph.o graphtest.cpp
+	$(CC) $(CFLAGS) -Wall -c graphtest.cpp 
+
+graphtest: graphtest.o matrix.o graph.o
+	$(CC) $(CFLAGS) $(LIB) -Wall graphtest.o graph.o matrix.o -o graphtest
+
+genrandmo: genrandmo.o matroid.o matrix.o mathprog.o graph.o
+	$(CC) $(CFLAGS) $(LIB) -Wall genrandmo.o matrix.o matroid.o graph.o mathprog.o -o genrandmo
+
+genrandmo.o: genrandmo.cpp mathprog.h matroid.h matrix.h graph.h
+	$(CC) $(CFLAGS) -Wall -c genrandmo.cpp 
+
+clean:
+	rm -f *.o testmatrix matroidtest graphtest genrandmo

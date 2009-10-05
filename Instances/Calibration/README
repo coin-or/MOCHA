@@ -1,0 +1,15 @@
+This is the calibration test set. 
+
+*.mo files are matroid optimization files that are in the format that
+the program matroidtest can read.
+
+The files...
+"gn10e22  gn10e28  gn10e33  gn11e13  gn11e20  gn11e27  gn11e41  gn12e16  gn12e24  gn12e33  gn13e19  gn13e29  gn13e39  gn9e18  gn9e27"
+are the adjacency matrices for all fifteen graphs.
+
+
+*INT* files are the randomly selected interior integer points selected for 
+our tests.
+
+*RAT* files are the randomly selected interior rational points selected for
+our tests.
