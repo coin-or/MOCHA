@@ -1,4 +1,4 @@
-## $Rev: 311 $ $Date: 2009-09-19 22:06:35 -0400 (Sat, 19 Sep 2009) $
+## $Rev$ $Date$
 AC_INIT([MOCHA], [0.9], [dchaws+MOCHA@gmail.com])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_LANG(C++)

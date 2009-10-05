@@ -592,10 +592,16 @@ Instances/Solids/Solid-truncatedtetrahedron-d3w0w1000.mo -text
 Instances/Solids/Solid-truncatedtetrahedron-d3w0w20.mo -text
 /LICENSE -text
 /Makefile.am -text
+/Makefile.in -text
 /README -text
 /TODO -text
+/configure -text
 /configure.ac -text
+/depcomp -text
+/install-sh -text
+/missing -text
 src/Makefile.am -text
+src/Makefile.in -text
 src/OLDMakefile -text
 src/alltoproj.cpp -text
 src/designtomatrix.cpp -text

@@ -1,4 +1,4 @@
-## $Rev: 310 $ $Date: 2009-09-19 19:57:40 -0400 (Sat, 19 Sep 2009) $
+## $Rev$ $Date$
 bin_PROGRAMS = genrandmo matroidtest graphtest testmatrix mvbalclust nagibatest genmatrix alltoproj point2po designtomatrix estimatebases tabusearch localsearch
 genrandmo_SOURCES = genrandmo.cpp mathprog.cpp matrix.cpp graph.cpp matroid.cpp
 #genrandmo_LDFLAGS = -lblas
