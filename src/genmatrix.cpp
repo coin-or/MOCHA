@@ -5,6 +5,10 @@
 
 // $Rev: 315 $ $Date: 2009-09-22 21:12:42 -0400 (Tue, 22 Sep 2009) $
 //
+
+
+/// \file genmatrix.cpp
+
 #include "matroid.h"
 #include "mathprog.h"
 #include <cstdlib>
