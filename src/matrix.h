@@ -7,6 +7,9 @@
 
 // matrix.h. Author David Haws
 
+
+/// \file matrix.h
+
 #ifndef MATRIX_H
 #define MATRIX_H 
 

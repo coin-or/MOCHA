@@ -3,6 +3,8 @@
 //
 // Distributed under the Eclipse Public License v 1.0. See ../LICENSE
 
+/// \file localsearch.cpp
+
 #include "matroid.h"
 #include "mathprog.h"
 #include <algorithm>
