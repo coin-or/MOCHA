@@ -482,6 +482,12 @@ Instances/Calibration/gn9e27d5w0w2_RAT.txt -text
 Instances/Calibration/gn9e27d5w0w5.mo -text
 Instances/Calibration/gn9e27d5w0w5_INT.txt -text
 Instances/Calibration/gn9e27d5w0w5_RAT.txt -text
+Instances/Examples/k6.allprojectedbases.m -text
+Instances/Examples/k6.boundary.m -text
+Instances/Examples/k6.dfbfsoutput.m -text
+Instances/Examples/k6.graph -text
+Instances/Examples/k6.mo -text
+Instances/Examples/k6.pivottesttabusearch.m -text
 Instances/ExperimentalDesign/P_20_2_4_Beta_2_9_l.mo -text
 Instances/ExperimentalDesign/P_28_2_5_Beta_2_9_l.mo -text
 Instances/ExperimentalDesign/README -text
