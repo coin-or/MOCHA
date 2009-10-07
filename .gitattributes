@@ -595,6 +595,7 @@ Instances/Solids/Solid-truncatedtetrahedron-d3w0w20.mo -text
 /Makefile.in -text
 /README -text
 /TODO -text
+/config.h.in -text
 /configure -text
 /configure.ac -text
 /depcomp -text
