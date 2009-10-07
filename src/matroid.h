@@ -4,6 +4,9 @@
 // Distributed under the Eclipse Public License v 1.0. See ../LICENSE
 
 // $Rev: 315 $ $Date: 2009-09-22 21:12:42 -0400 (Tue, 22 Sep 2009) $
+
+
+/// \file matroid.h
 #ifndef MATROID_H
 #define MATROID_H
 

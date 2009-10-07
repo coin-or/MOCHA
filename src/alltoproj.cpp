@@ -10,6 +10,8 @@
 // First argument should be the matrix that is our weighting.
 // The second argument should be the number of elements in each set
 
+/// \file alltoproj.cpp
+
 #include "matrix.h"
 #include <iostream>
 #include <fstream>

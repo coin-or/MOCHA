@@ -9,6 +9,9 @@
 // Taken from MOCHA package, which is distributed under the Eclipse 1.0 license.
 // See https://projects.coin-or.org/Mocha
 
+
+/// \file matrix.cpp
+
 #include <iostream>
 #include <iomanip>
 #include <math.h>

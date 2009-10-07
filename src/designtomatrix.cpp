@@ -9,6 +9,9 @@
 // It then computes A_ij := \prod_{h=1}^k P_{i,h}^B_{j,h} 
 // It reads in the matrices from standard input and prints the matrix to 
 // standard output
+
+
+/// \file designtomatrix.cpp
 #include"matrix.h"
 #include<cmath>
 

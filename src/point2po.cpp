@@ -7,6 +7,9 @@
 // This program reads in from stdin points, and finds the pareto optimum using 
 // a straightforward search
 
+/// \file point2po.cpp
+
+
 #include "matrix.h"
 #include "mathprog.h"
 #include <iostream>

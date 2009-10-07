@@ -5,6 +5,8 @@
 
 // $Rev: 315 $ $Date: 2009-09-22 21:12:42 -0400 (Tue, 22 Sep 2009) $
 
+/// \file nagibatest.cpp
+
 #include "graph.h"
 #include <iostream>
 #include <fstream>
