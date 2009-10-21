@@ -8,6 +8,12 @@ AC_CONFIG_FILES([
  Makefile
  src/Makefile
 ])
+
+m4_pattern_allow([AC_COIN_THIRDPARTY_SUBDIRS])
+
+AC_COIN_THIRDPARTY_SUBDIRS([Blas],[ThirdParty/Blas],[daxpy.f])
+AC_COIN_THIRDPARTY_SUBDIRS([Lapack],[ThirdParty/Lapack],[LAPACK/SRC/dlarf.f])
+
 AC_ARG_WITH(lapack-prefix,
 [  --with-lapack-prefix=DIR   path to LAPACK],[
   if test "$withval" != "no"; then

@@ -2453,6 +2453,12 @@ fi
                     ac_config_files="$ac_config_files Makefile src/Makefile"
 
 
+
+
+AC_COIN_THIRDPARTY_SUBDIRS(Blas,ThirdParty/Blas,daxpy.f)
+AC_COIN_THIRDPARTY_SUBDIRS(Lapack,ThirdParty/Lapack,LAPACK/SRC/dlarf.f)
+
+
 # Check whether --with-lapack-prefix or --without-lapack-prefix was given.
 if test "${with_lapack_prefix+set}" = set; then
   withval="$with_lapack_prefix"
