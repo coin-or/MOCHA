@@ -638,8 +638,10 @@ MOCHA/src/point2po.cpp -text
 MOCHA/src/tabusearch.cpp -text
 MOCHA/src/testmatrix.cpp -text
 /Makefile.am -text
+/Makefile.in -text
 /config.guess -text
 /config.status -text
+/configure -text
 /configure.ac -text
 doxydoc/doxygen.conf -text
 /install-sh -text
