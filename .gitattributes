@@ -642,7 +642,6 @@ MOCHA/src/testmatrix.cpp -text
 /acinclude.m4 -text
 /aclocal.m4 -text
 /config.guess -text
-/config.status -text
 /config.sub -text
 /configure -text
 /configure.ac -text
