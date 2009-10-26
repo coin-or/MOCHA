@@ -601,6 +601,8 @@ Instances/Solids/Solid-truncatedtetrahedron-d3w0w20.mo -text
 /Makefile.in -text
 /README -text
 /TODO -text
+/acinclude.m4 -text
+/aclocal.m4 -text
 /config.guess -text
 /config.h.in -text
 /config.sub -text
