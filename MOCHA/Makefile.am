@@ -1,4 +1,4 @@
-## $Rev$ $Date$
+## $Rev: 41 $ $Date: 2009-10-26 14:47:42 -0400 (Mon, 26 Oct 2009) $
 SUBDIRS = src
 docdir = ${datadir}/doc/${PACKAGE}
 dist_doc_DATA = README
