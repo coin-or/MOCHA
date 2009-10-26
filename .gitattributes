@@ -642,3 +642,6 @@ MOCHA/src/testmatrix.cpp -text
 /config.status -text
 /configure.ac -text
 doxydoc/doxygen.conf -text
+/install-sh -text
+/ltmain.sh -text
+/missing -text

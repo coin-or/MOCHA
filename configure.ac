@@ -1,6 +1,6 @@
 # Copyright (C) 2009 David Haws.
 # All Rights Reserved.
-# This file is distributed under the Eclipse Common Public License.
+# This file is distributed under the Eclipse Public License.
 
 ## $Id$
 
