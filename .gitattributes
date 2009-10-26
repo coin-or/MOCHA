@@ -637,5 +637,8 @@ MOCHA/src/nagibatest.cpp -text
 MOCHA/src/point2po.cpp -text
 MOCHA/src/tabusearch.cpp -text
 MOCHA/src/testmatrix.cpp -text
+/Makefile.am -text
+/config.guess -text
+/config.status -text
 /configure.ac -text
 doxydoc/doxygen.conf -text

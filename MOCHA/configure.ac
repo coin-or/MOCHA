@@ -9,10 +9,12 @@ AC_CONFIG_FILES([
  src/Makefile
 ])
 
-m4_pattern_allow([AC_COIN_THIRDPARTY_SUBDIRS])
+#m4_pattern_allow([AC_COIN_THIRDPARTY_SUBDIRS])
 
-AC_COIN_THIRDPARTY_SUBDIRS([Blas],[ThirdParty/Blas],[daxpy.f])
-AC_COIN_THIRDPARTY_SUBDIRS([Lapack],[ThirdParty/Lapack],[LAPACK/SRC/dlarf.f])
+AC_COIN_HAS_BLAS
+AC_COIN_HAS_LAPACK
+#AC_COIN_THIRDPARTY_SUBDIRS([Blas],[ThirdParty/Blas],[daxpy.f])
+#AC_COIN_THIRDPARTY_SUBDIRS([Lapack],[ThirdParty/Lapack],[LAPACK/SRC/dlarf.f])
 
 AC_ARG_WITH(lapack-prefix,
 [  --with-lapack-prefix=DIR   path to LAPACK],[
