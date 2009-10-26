@@ -601,12 +601,15 @@ Instances/Solids/Solid-truncatedtetrahedron-d3w0w20.mo -text
 /Makefile.in -text
 /README -text
 /TODO -text
+/config.guess -text
 /config.h.in -text
+/config.sub -text
 /configure -text
 /configure.ac -text
 /depcomp -text
 doxydoc/doxygen.conf -text
 /install-sh -text
+/ltmain.sh -text
 /missing -text
 src/Makefile.am -text
 src/Makefile.in -text
