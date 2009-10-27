@@ -1,5 +1,16 @@
-## $Rev: 41 $ $Date: 2009-10-26 14:47:42 -0400 (Mon, 26 Oct 2009) $
+# Copyright 2009 by Jesus De Loera, David Haws, Jon Lee, Allison
+# O'Hair, University of California at Davis, IBM, Inc.
+# All Rights Reserved.
+# This file is distributed under the Eclips Public License v 1.0
+
+## $Id$
+
+# Authors:  David Haws      University of California at Davis   2009-10-27
+
+AUTOMAKE_OPTIONS = foreign
+
 SUBDIRS = src
+
 docdir = ${datadir}/doc/${PACKAGE}
 dist_doc_DATA = README
 EXTRA_DIST=LICENSE \

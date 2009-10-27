@@ -14,6 +14,13 @@
 
 @SET_MAKE@
 
+# Copyright 2009 by Jesus De Loera, David Haws, Jon Lee, Allison
+# O'Hair, University of California at Davis, IBM, Inc.
+# All Rights Reserved.
+# This file is distributed under the Eclips Public License v 1.0
+
+# Authors:  David Haws      University of California at Davis   2009-10-27
+
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
@@ -34,6 +41,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+build_triplet = @build@
+host_triplet = @host@
 bin_PROGRAMS = genrandmo$(EXEEXT) matroidtest$(EXEEXT) \
 	graphtest$(EXEEXT) testmatrix$(EXEEXT) mvbalclust$(EXEEXT) \
 	nagibatest$(EXEEXT) genmatrix$(EXEEXT) alltoproj$(EXEEXT) \
@@ -55,60 +64,66 @@ binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
 am_alltoproj_OBJECTS = alltoproj.$(OBJEXT) matrix.$(OBJEXT)
 alltoproj_OBJECTS = $(am_alltoproj_OBJECTS)
-alltoproj_LDADD = $(LDADD)
+am__DEPENDENCIES_1 =
+alltoproj_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_designtomatrix_OBJECTS = designtomatrix.$(OBJEXT) matrix.$(OBJEXT)
 designtomatrix_OBJECTS = $(am_designtomatrix_OBJECTS)
-designtomatrix_LDADD = $(LDADD)
+designtomatrix_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_estimatebases_OBJECTS = estimatebases.$(OBJEXT) matroid.$(OBJEXT) \
 	matrix.$(OBJEXT) graph.$(OBJEXT)
 estimatebases_OBJECTS = $(am_estimatebases_OBJECTS)
-estimatebases_LDADD = $(LDADD)
+estimatebases_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_genmatrix_OBJECTS = genmatrix.$(OBJEXT) matrix.$(OBJEXT)
 genmatrix_OBJECTS = $(am_genmatrix_OBJECTS)
-genmatrix_LDADD = $(LDADD)
+genmatrix_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_genrandmo_OBJECTS = genrandmo.$(OBJEXT) mathprog.$(OBJEXT) \
 	matrix.$(OBJEXT) graph.$(OBJEXT) matroid.$(OBJEXT)
 genrandmo_OBJECTS = $(am_genrandmo_OBJECTS)
-genrandmo_LDADD = $(LDADD)
+genrandmo_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_graphtest_OBJECTS = graphtest.$(OBJEXT) matrix.$(OBJEXT) \
 	graph.$(OBJEXT)
 graphtest_OBJECTS = $(am_graphtest_OBJECTS)
-graphtest_LDADD = $(LDADD)
+graphtest_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_localsearch_OBJECTS = localsearch.$(OBJEXT) matroid.$(OBJEXT) \
 	matrix.$(OBJEXT) graph.$(OBJEXT) mathprog.$(OBJEXT)
 localsearch_OBJECTS = $(am_localsearch_OBJECTS)
-localsearch_LDADD = $(LDADD)
+localsearch_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_matroidtest_OBJECTS = matroidtest.$(OBJEXT) matrix.$(OBJEXT) \
 	graph.$(OBJEXT) matroid.$(OBJEXT) mathprog.$(OBJEXT)
 matroidtest_OBJECTS = $(am_matroidtest_OBJECTS)
-matroidtest_LDADD = $(LDADD)
+matroidtest_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_mvbalclust_OBJECTS = mvbalclust.$(OBJEXT) mathprog.$(OBJEXT) \
 	matrix.$(OBJEXT) graph.$(OBJEXT) matroid.$(OBJEXT)
 mvbalclust_OBJECTS = $(am_mvbalclust_OBJECTS)
-mvbalclust_LDADD = $(LDADD)
+mvbalclust_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_nagibatest_OBJECTS = nagibatest.$(OBJEXT) graph.$(OBJEXT) \
 	matrix.$(OBJEXT)
 nagibatest_OBJECTS = $(am_nagibatest_OBJECTS)
-nagibatest_LDADD = $(LDADD)
+nagibatest_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_point2po_OBJECTS = point2po.$(OBJEXT) mathprog.$(OBJEXT) \
 	matrix.$(OBJEXT) graph.$(OBJEXT) matroid.$(OBJEXT)
 point2po_OBJECTS = $(am_point2po_OBJECTS)
-point2po_LDADD = $(LDADD)
+point2po_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_tabusearch_OBJECTS = tabusearch.$(OBJEXT) matroid.$(OBJEXT) \
 	matrix.$(OBJEXT) graph.$(OBJEXT) mathprog.$(OBJEXT)
 tabusearch_OBJECTS = $(am_tabusearch_OBJECTS)
-tabusearch_LDADD = $(LDADD)
+tabusearch_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_testmatrix_OBJECTS = testmatrix.$(OBJEXT) matrix.$(OBJEXT)
 testmatrix_OBJECTS = $(am_testmatrix_OBJECTS)
-testmatrix_LDADD = $(LDADD)
+testmatrix_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+LTCXXCOMPILE = $(LIBTOOL) --tag=CXX --mode=compile $(CXX) $(DEFS) \
+	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
+	$(AM_CXXFLAGS) $(CXXFLAGS)
 CXXLD = $(CXX)
-CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
-	-o $@
+CXXLINK = $(LIBTOOL) --tag=CXX --mode=link $(CXXLD) $(AM_CXXFLAGS) \
+	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = $(alltoproj_SOURCES) $(designtomatrix_SOURCES) \
 	$(estimatebases_SOURCES) $(genmatrix_SOURCES) \
 	$(genrandmo_SOURCES) $(graphtest_SOURCES) \
@@ -127,15 +142,25 @@ ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
+ADDLIBS = @ADDLIBS@
+ADD_CFLAGS = @ADD_CFLAGS@
+ADD_CXXFLAGS = @ADD_CXXFLAGS@
+ADD_FFLAGS = @ADD_FFLAGS@
+ALWAYS_FALSE_FALSE = @ALWAYS_FALSE_FALSE@
+ALWAYS_FALSE_TRUE = @ALWAYS_FALSE_TRUE@
 AMDEP_FALSE = @AMDEP_FALSE@
 AMDEP_TRUE = @AMDEP_TRUE@
 AMTAR = @AMTAR@
+AR = @AR@
 AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
+AUX_DIR = @AUX_DIR@
 AWK = @AWK@
+BUILDTOOLSDIR = @BUILDTOOLSDIR@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
+CDEFS = @CDEFS@
 CFLAGS = @CFLAGS@
 COIN_BUILD_BLAS_FALSE = @COIN_BUILD_BLAS_FALSE@
 COIN_BUILD_BLAS_TRUE = @COIN_BUILD_BLAS_TRUE@
@@ -145,30 +170,60 @@ COIN_HAS_BLAS_FALSE = @COIN_HAS_BLAS_FALSE@
 COIN_HAS_BLAS_TRUE = @COIN_HAS_BLAS_TRUE@
 COIN_HAS_LAPACK_FALSE = @COIN_HAS_LAPACK_FALSE@
 COIN_HAS_LAPACK_TRUE = @COIN_HAS_LAPACK_TRUE@
+COIN_HAS_MOCHA_FALSE = @COIN_HAS_MOCHA_FALSE@
+COIN_HAS_MOCHA_TRUE = @COIN_HAS_MOCHA_TRUE@
+CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CXX = @CXX@
+CXXCPP = @CXXCPP@
+CXXDEFS = @CXXDEFS@
 CXXDEPMODE = @CXXDEPMODE@
 CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
+DBG_CFLAGS = @DBG_CFLAGS@
+DBG_CXXFLAGS = @DBG_CXXFLAGS@
+DBG_FFLAGS = @DBG_FFLAGS@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
+ECHO = @ECHO@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
+EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 F77 = @F77@
+FADDLIBS = @FADDLIBS@
 FFLAGS = @FFLAGS@
 FLIBS = @FLIBS@
+HAVE_EXTERNALS_FALSE = @HAVE_EXTERNALS_FALSE@
+HAVE_EXTERNALS_TRUE = @HAVE_EXTERNALS_TRUE@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 LDFLAGS = @LDFLAGS@
+LIBEXT = @LIBEXT@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
+LIBTOOL = @LIBTOOL@
+LIBTOOLM4 = @LIBTOOLM4@
+LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
+LT_LDFLAGS = @LT_LDFLAGS@
+MAINT = @MAINT@
+MAINTAINER_MODE_FALSE = @MAINTAINER_MODE_FALSE@
+MAINTAINER_MODE_TRUE = @MAINTAINER_MODE_TRUE@
 MAKEINFO = @MAKEINFO@
+MOCHADOCDIR = @MOCHADOCDIR@
+MOCHAOBJDIR = @MOCHAOBJDIR@
+MOCHASRCDIR = @MOCHASRCDIR@
+MPICC = @MPICC@
+MPICXX = @MPICXX@
+MPIF77 = @MPIF77@
 OBJEXT = @OBJEXT@
+OPT_CFLAGS = @OPT_CFLAGS@
+OPT_CXXFLAGS = @OPT_CXXFLAGS@
+OPT_FFLAGS = @OPT_FFLAGS@
 PACKAGE = @PACKAGE@
 PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
@@ -176,14 +231,26 @@ PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+RANLIB = @RANLIB@
+RPATH_FLAGS = @RPATH_FLAGS@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
+THIRDBUILDLIBS = @THIRDBUILDLIBS@
 VERSION = @VERSION@
+VPATH_DISTCLEANFILES = @VPATH_DISTCLEANFILES@
+abs_bin_dir = @abs_bin_dir@
+abs_include_dir = @abs_include_dir@
+abs_lib_dir = @abs_lib_dir@
+abs_source_dir = @abs_source_dir@
+ac_c_preproc_warn_flag = @ac_c_preproc_warn_flag@
+ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
 ac_ct_F77 = @ac_ct_F77@
+ac_ct_RANLIB = @ac_ct_RANLIB@
 ac_ct_STRIP = @ac_ct_STRIP@
+ac_cxx_preproc_warn_flag = @ac_cxx_preproc_warn_flag@
 am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
 am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
 am__fastdepCXX_FALSE = @am__fastdepCXX_FALSE@
@@ -194,10 +261,21 @@ am__quote = @am__quote@
 am__tar = @am__tar@
 am__untar = @am__untar@
 bindir = @bindir@
+build = @build@
 build_alias = @build_alias@
+build_cpu = @build_cpu@
+build_os = @build_os@
+build_vendor = @build_vendor@
 datadir = @datadir@
 exec_prefix = @exec_prefix@
+have_autoconf = @have_autoconf@
+have_automake = @have_automake@
+have_svn = @have_svn@
+host = @host@
 host_alias = @host_alias@
+host_cpu = @host_cpu@
+host_os = @host_os@
+host_vendor = @host_vendor@
 includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
@@ -211,40 +289,55 @@ prefix = @prefix@
 program_transform_name = @program_transform_name@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
+sol_cc_compiler = @sol_cc_compiler@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
+AUTOMAKE_OPTIONS = foreign
 genrandmo_SOURCES = genrandmo.cpp mathprog.cpp matrix.cpp graph.cpp matroid.cpp
+genrandmo_LDADD = $(THIRDBUILDLIBS) $(ADDLIBS)
 #genrandmo_LDFLAGS = -lblas
 matroidtest_SOURCES = matroidtest.cpp matrix.cpp graph.cpp matroid.cpp mathprog.cpp
+matroidtest_LDADD = $(THIRDBUILDLIBS) $(ADDLIBS)
 #matroidtest_LDFLAGS = -lblas
 graphtest_SOURCES = graphtest.cpp matrix.cpp graph.cpp
+graphtest_LDADD = $(THIRDBUILDLIBS) $(ADDLIBS)
 #graphtest_LDFLAGS = -lblas
 testmatrix_SOURCES = testmatrix.cpp matrix.cpp
+testmatrix_LDADD = $(THIRDBUILDLIBS) $(ADDLIBS)
 #testmatrix_LDFLAGS = -lblas
 mvbalclust_SOURCES = mvbalclust.cpp mathprog.cpp matrix.cpp graph.cpp matroid.cpp 
+mvbalclust_LDADD = $(THIRDBUILDLIBS) $(ADDLIBS)
 #mvbalclust_LDFLAGS = -lblas
 nagibatest_SOURCES = nagibatest.cpp graph.cpp matrix.cpp
+nagibatest_LDADD = $(THIRDBUILDLIBS) $(ADDLIBS)
 #nagibatest_LDFLAGS = -lblas
 genmatrix_SOURCES = genmatrix.cpp matrix.cpp
+genmatrix_LDADD = $(THIRDBUILDLIBS) $(ADDLIBS)
 #genmatrix_LDFLAGS = -lblas
 alltoproj_SOURCES = alltoproj.cpp matrix.cpp
+alltoproj_LDADD = $(THIRDBUILDLIBS) $(ADDLIBS)
 #alltoproj_LDFLAGS = -lblas
 point2po_SOURCES = point2po.cpp mathprog.cpp matrix.cpp graph.cpp matroid.cpp 
+point2po_LDADD = $(THIRDBUILDLIBS) $(ADDLIBS)
 #point2po_LDFLAGS = -lblas
 designtomatrix_SOURCES = designtomatrix.cpp matrix.cpp
+designtomatrix_LDADD = $(THIRDBUILDLIBS) $(ADDLIBS)
 #designtomatrix_LDFLAGS = -lblas
 estimatebases_SOURCES = estimatebases.cpp matroid.cpp matrix.cpp graph.cpp
+estimatebases_LDADD = $(THIRDBUILDLIBS) $(ADDLIBS)
 #estimatebases_LDFLAGS = -lblas
 tabusearch_SOURCES = tabusearch.cpp matroid.cpp matrix.cpp graph.cpp mathprog.cpp
+tabusearch_LDADD = $(THIRDBUILDLIBS) $(ADDLIBS)
 #tabusearch_LDFLAGS = -lblas
 localsearch_SOURCES = localsearch.cpp matroid.cpp matrix.cpp graph.cpp mathprog.cpp
+localsearch_LDADD = $(THIRDBUILDLIBS) $(ADDLIBS)
 #localsearch_LDFLAGS = -lblas
 EXTRA_DIST = matrix.h matroid.h graph.h mathprog.h
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cpp .o .obj
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+.SUFFIXES: .cpp .lo .o .obj
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -269,9 +362,9 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 
-$(top_srcdir)/configure:  $(am__configure_deps)
+$(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
-$(ACLOCAL_M4):  $(am__aclocal_m4_deps)
+$(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 install-binPROGRAMS: $(bin_PROGRAMS)
 	@$(NORMAL_INSTALL)
@@ -279,10 +372,11 @@ install-binPROGRAMS: $(bin_PROGRAMS)
 	@list='$(bin_PROGRAMS)'; for p in $$list; do \
 	  p1=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
 	  if test -f $$p \
+	     || test -f $$p1 \
 	  ; then \
 	    f=`echo "$$p1" | sed 's,^.*/,,;$(transform);s/$$/$(EXEEXT)/'`; \
-	   echo " $(INSTALL_PROGRAM_ENV) $(binPROGRAMS_INSTALL) '$$p' '$(DESTDIR)$(bindir)/$$f'"; \
-	   $(INSTALL_PROGRAM_ENV) $(binPROGRAMS_INSTALL) "$$p" "$(DESTDIR)$(bindir)/$$f" || exit 1; \
+	   echo " $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(binPROGRAMS_INSTALL) '$$p' '$(DESTDIR)$(bindir)/$$f'"; \
+	   $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(binPROGRAMS_INSTALL) "$$p" "$(DESTDIR)$(bindir)/$$f" || exit 1; \
 	  else :; fi; \
 	done
 
@@ -295,7 +389,11 @@ uninstall-binPROGRAMS:
 	done
 
 clean-binPROGRAMS:
-	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+	@list='$(bin_PROGRAMS)'; for p in $$list; do \
+	  f=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
+	  echo " rm -f $$p $$f"; \
+	  rm -f $$p $$f ; \
+	done
 alltoproj$(EXEEXT): $(alltoproj_OBJECTS) $(alltoproj_DEPENDENCIES) 
 	@rm -f alltoproj$(EXEEXT)
 	$(CXXLINK) $(alltoproj_LDFLAGS) $(alltoproj_OBJECTS) $(alltoproj_LDADD) $(LIBS)
@@ -373,6 +471,22 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.cpp.lo:
+@am__fastdepCXX_TRUE@	if $(LTCXXCOMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \
+@am__fastdepCXX_TRUE@	then mv -f "$(DEPDIR)/$*.Tpo" "$(DEPDIR)/$*.Plo"; else rm -f "$(DEPDIR)/$*.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ $<
+
+mostlyclean-libtool:
+	-rm -f *.lo
+
+clean-libtool:
+	-rm -rf .libs _libs
+
+distclean-libtool:
+	-rm -f libtool
 uninstall-info-am:
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
@@ -483,13 +597,13 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
-clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
+clean-am: clean-binPROGRAMS clean-generic clean-libtool mostlyclean-am
 
 distclean: distclean-am
 	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
-	distclean-tags
+	distclean-libtool distclean-tags
 
 dvi: dvi-am
 
@@ -518,7 +632,8 @@ maintainer-clean-am: distclean-am maintainer-clean-generic
 
 mostlyclean: mostlyclean-am
 
-mostlyclean-am: mostlyclean-compile mostlyclean-generic
+mostlyclean-am: mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool
 
 pdf: pdf-am
 
@@ -531,15 +646,16 @@ ps-am:
 uninstall-am: uninstall-binPROGRAMS uninstall-info-am
 
 .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
-	clean-generic ctags distclean distclean-compile \
-	distclean-generic distclean-tags distdir dvi dvi-am html \
-	html-am info info-am install install-am install-binPROGRAMS \
-	install-data install-data-am install-exec install-exec-am \
-	install-info install-info-am install-man install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
-	uninstall-am uninstall-binPROGRAMS uninstall-info-am
+	clean-generic clean-libtool ctags distclean distclean-compile \
+	distclean-generic distclean-libtool distclean-tags distdir dvi \
+	dvi-am html html-am info info-am install install-am \
+	install-binPROGRAMS install-data install-data-am install-exec \
+	install-exec-am install-info install-info-am install-man \
+	install-strip installcheck installcheck-am installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am tags uninstall uninstall-am \
+	uninstall-binPROGRAMS uninstall-info-am
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

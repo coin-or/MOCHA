@@ -1,36 +1,115 @@
-## $Rev: 42 $ $Date: 2009-10-26 15:13:29 -0400 (Mon, 26 Oct 2009) $
-AC_INIT([MOCHA], [0.9], [dchaws+MOCHA@gmail.com])
-AM_INIT_AUTOMAKE([-Wall -Werror foreign])
-AC_LANG(C++)
-AC_PROG_CXX
-AC_CONFIG_HEADERS([config.h])
-AC_CONFIG_FILES([
- Makefile
- src/Makefile
-])
+# Copyright 2009 by Jesus De Loera, David Haws, Jon Lee, Allison
+# O'Hair, University of California at Davis, IBM, Inc.
+# All Rights Reserved.
+# This file is distributed under the Eclips Public License v 1.0
 
-#m4_pattern_allow([AC_COIN_THIRDPARTY_SUBDIRS])
+## $Id$
+
+# Authors:  David Haws      University of California at Davis   2009-10-27
+
+#############################################################################
+#                       Names and other basic things                        #
+#############################################################################
+
+AC_PREREQ(2.59)
+
+AC_INIT([MOCHA],[0.9],[dchaws+MOCHA@gmail.com])
+
+AC_COPYRIGHT(
+[Copyright 2009 by Jesus De Loera, David Haws, Jon Lee, Allison O'Hair, University of California at Davis, IBM, Inc.
+All Rights Reserved.
+This file is part of the open source package MOCHA which is distributed
+under the Eclipse Public License.])
+
+# List one file in the package so that the configure script can test
+# whether the package is actually there
+AC_CONFIG_SRCDIR(src/graph.h)
+
+# Where should everything be installed by default?  Here, we want it
+# to be installed directly in 'bin', 'lib', 'include' subdirectories
+# of the directory where configure is run.  The default would be
+# /usr/local.
+AC_PREFIX_DEFAULT([`pwd`])
+
+#############################################################################
+#                         Standard build tool stuff                         #
+#############################################################################
+
+# Get the system type
+AC_CANONICAL_BUILD
+
+# If this project depends on external projects, the Externals file in
+# the source root directory contains definition of where to find those
+# externals.  The following macro ensures that those externals are
+# retrieved by svn if they are not there yet.
+AC_COIN_PROJECTDIR_INIT
+
+# Check if user wants to produce debugging code
+AC_COIN_DEBUG_COMPILE(MOCHA)
+
+# We need egrep and ln -s somewherw
+AC_PROG_EGREP
+AC_PROG_LN_S
+
+# Get the name of the C++ compiler and appropriate compiler options
+AC_COIN_PROG_CXX
+
+# Get the name of the Fortran compiler and appropriate compiler options
+AC_COIN_PROG_F77
+
+# Find out how to call Fortran from C and determine Fortran runtime libraries
+AC_COIN_F77_WRAPPERS
+
+# Initialize automake and libtool
+AC_COIN_INIT_AUTO_TOOLS
+
+
+#############################################################################
+#                              COIN components                              #
+#############################################################################
+
+AC_COIN_HAS_PROJECT(MOCHA)
+
+
+##########################################################################
+
+# Additional libraries and packages
+
+### We need to restore the value of LIBS before those test, otherwise libtool
+### will hick-up
+##LIBS_without_ADDLIBS="$LIBS"
+
+#######################
+#        BLAS         #
+#######################
 
 AC_COIN_HAS_BLAS
+if test $coin_has_blas = no; then
+  AC_MSG_ERROR([cannot find BLAS])
+fi
+
+if test "$use_blas" = BUILD; then
+  THIRDBUILDLIBS="../../ThirdParty/Blas/libcoinblas.la $THIRDBUILDLIBS"
+fi
+
+#######################
+#       LAPACK        #
+#######################
+
 AC_COIN_HAS_LAPACK
-#AC_COIN_THIRDPARTY_SUBDIRS([Blas],[ThirdParty/Blas],[daxpy.f])
-#AC_COIN_THIRDPARTY_SUBDIRS([Lapack],[ThirdParty/Lapack],[LAPACK/SRC/dlarf.f])
+if test $coin_has_lapack = no; then
+  AC_MSG_WARN([cannot find LAPACK])
+fi
 
-AC_ARG_WITH(lapack-prefix,
-[  --with-lapack-prefix=DIR   path to LAPACK],[
-  if test "$withval" != "no"; then
-    CPPFLAGS="${CPPFLAGS} -I$withval/include"
-    LDFLAGS="${LDFLAGS} -L$withval/lib"
-  fi
-])
+if test "$use_lapack" = BUILD; then
+  THIRDBUILDLIBS="../../ThirdParty/Lapack/libcoinlapack.la $THIRDBUILDLIBS"
+fi
 
-AC_ARG_WITH(blas-prefix,
-[  --with-blas-prefix=DIR   path to BLAS],[
-  if test "$withval" != "no"; then
-    CPPFLAGS="${CPPFLAGS} -I$withval/include"
-    LDFLAGS="${LDFLAGS} -L$withval/lib"
-  fi
-])
+AC_SUBST(THIRDBUILDLIBS)
+
+#######################
+#         GMP         #
+#######################
 
 AC_ARG_WITH([gmp],
   [AS_HELP_STRING([--with-gmp],
@@ -58,25 +137,10 @@ AS_IF([test "x$with_gmp" != xno],
   ])
 
 
-#AC_ARG_WITH(gmp,
-#[  --with-gmp=DIR   path to GMP],[
-#  if test "$withval" != ""; then
-#    CPPFLAGS="${CPPFLAGS} -I$withval/include"
-#    LDFLAGS="${LDFLAGS} -L$withval/lib"
-#  fi
-#  with_gmp=yes
-#],[with_gmp=no])
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_FILES([
+ Makefile
+ src/Makefile
+])
 
-#AC_CHECK_LIB(gmp, __gmpz_init, ,
-#       [AC_MSG_ERROR([GNU MP not found, see http://gmplib.org/])])
-#AC_CHECK_LIB(gmpxx, __gmpz_init, ,
-#       [AC_MSG_ERROR([GNU MP with cxx compiled not found, see http://gmplib.org/])])
-#AC_CHECK_HEADER([gmpxx.h], ,
-#       [AC_MSG_ERROR([Header gmpxx.h not found])],[AC_INCLUDES_DEFAULT])
-
-AC_CHECK_LIB(lapack, dgesvd_, ,
-       [AC_MSG_ERROR([Lapack not found, see ])])
-AC_CHECK_LIB(blas, main, ,
-       [AC_MSG_ERROR([Blas not found, see ])])
-
-AC_OUTPUT
+AC_COIN_FINALIZE
