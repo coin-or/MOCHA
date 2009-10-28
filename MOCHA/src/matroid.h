@@ -33,8 +33,8 @@ const int MAXDIM = 300;
 const int MAXIMAL_RAND = RAND_MAX;
 // I didn't know what to put here
 //const int MAXIMAL_RAND = 100000;
-const float SOLVER_ACCURACY = 0.000001;
-const float PI = 3.14159254;
+const double SOLVER_ACCURACY = 0.000001;
+const double PI = 3.14159254;
 
 class Matroid {
 public:

@@ -109,16 +109,16 @@ double FunctionalLinear::Evaluate (Matrix M)
 
 MathProg::MathProg ()
 {
-};
+}
 
 MathProg::MathProg (std::istream &in)
 {
     //getMathProg(in);
-};
+}
 
 MathProg::~MathProg ()
 {
-};
+}
 
 std::ostream& operator<< (std::ostream& o, MathProg &someMathProg)
 {
@@ -439,7 +439,7 @@ list <set <unsigned> > ProjBalMatroidOpt::TabuSearchHeuristic (set <unsigned> fi
     tabuBasesList.push_back(firstBasis);
         
     double  currentMin;
-    double  tempMin;
+    double  tempMin = 0;
     unsigned pivotsSinceNoImprovement = 0;
     set <unsigned> minBasis, currentBasis, currentMinBasis;
     list <set <unsigned> > pivotBases;
@@ -944,7 +944,7 @@ void ProjBalMatroidOpt::BFSDifferentFiberInternal(set <unsigned> currentBasis, s
 
         ios::fmtflags oldFlags;
         int oldStreamSize;
-        oldStreamSize = cout.precision(1);
+        oldStreamSize = (int)cout.precision(1);
         oldFlags = cout.setf (ios::fixed);
 
         cout << adjacentToNewBases << "% adjacent bases eval differently and new." << endl;
@@ -1010,12 +1010,12 @@ set <Matrix, ltcolvec> ProjBalMatroidOpt::ParetoOptimum( set <Matrix, ltcolvec> 
 		{
 	    counter = 0;
 		Matrix tempM2 = *stepit;
-		for(int i = 0; i < tempM.rows; i++)
+		for(int i = 0; i < (int)tempM.rows; i++)
 		{
 		  if(tempM(i,0) >= tempM2(i,0)) //if all coordinates are larger than another point
 		    counter++;
         }
-		if(counter == tempM.rows)
+		if(counter == (int)tempM.rows)
 		{
 		  popt.erase(msetit);
 		  msetit = msetit2;
@@ -1062,8 +1062,8 @@ set <Matrix, ltcolvec> ProjBalMatroidOpt::MinMax(set <Matrix, ltcolvec> &inputPo
     set <Matrix, ltcolvec>::iterator msetit = inputPoints.begin();
 	
 	//An array to hold the max coordinate for each point
-	int m = inputPoints.size();
-	int maxcoor[m];
+	int m = (int)inputPoints.size();
+	int *maxcoor = new int[m];
 	
 	int mspot = 0;
 	
@@ -1072,11 +1072,11 @@ set <Matrix, ltcolvec> ProjBalMatroidOpt::MinMax(set <Matrix, ltcolvec> &inputPo
 	{
 		Matrix tempM = *msetit;
 		
-		maxcoor[mspot] = tempM(0,0);
-		for(int i = 1; i < tempM.rows; i++)
+		maxcoor[mspot] = (int)tempM(0,0);
+		for(int i = 1; i < (int)tempM.rows; i++)
 		{
 			if(tempM(i,0) > maxcoor[mspot])
-				maxcoor[mspot] = tempM(i,0);
+				maxcoor[mspot] = (int)tempM(i,0);
 		}
 		mspot++;
 	}
@@ -1099,6 +1099,7 @@ set <Matrix, ltcolvec> ProjBalMatroidOpt::MinMax(set <Matrix, ltcolvec> &inputPo
 		msetit++;
 	} 
 	
+    delete maxcoor;
 	return mmpoints;
 }
 
@@ -1179,7 +1180,7 @@ set <Matrix, ltcolvec> ProjBalMatroidOpt::PivotTestLocalSearch(set <Matrix, ltco
     set <Matrix, ltcolvec>::const_iterator mit = testPoints.begin();
 
     cout << testPoints.size() << " points to test." << endl;    
-    unsigned tenPercent = testPoints.size() / 10;
+    unsigned tenPercent = (unsigned)testPoints.size() / 10;
     unsigned i=0;
     for (;mit != testPoints.end();mit++)
     {
@@ -1244,7 +1245,7 @@ set <Matrix, ltcolvec> ProjBalMatroidOpt::PivotTestTabuSearch(set <Matrix, ltcol
     Matrix tempM;
 
     cout << testPoints.size() << " points to test." << endl;    
-    unsigned tenPercent = testPoints.size() / 10;
+    unsigned tenPercent = (unsigned)testPoints.size() / 10;
     if (tenPercent == 0)
     {
         tenPercent = 1;
@@ -1816,8 +1817,8 @@ set <Matrix, ltcolvec> ProjBalMatroidOpt::BoundaryTrianglesTwoDim ( set <Matrix,
     int highFound;
     set <Matrix, ltcolvec>::const_iterator tmit;
     Matrix tempM;
-    double lowDistance;
-    double highDistance;
+    double lowDistance = 0;
+    double highDistance = 0;
     Matrix lowNeighbor(2,1), highNeighbor(2,1);
     //cout << "lowNeighbor " << &lowNeighbor << endl;
     //cout << "highNeighbor " << &highNeighbor << endl;
@@ -1895,9 +1896,9 @@ set <Matrix, ltcolvec> ProjBalMatroidOpt::BoundaryTrianglesTwoDim ( set <Matrix,
         {
             double slope = ( (*mit)(1,0) - lowNeighbor(1,0) ) / ( (*mit)(0,0) - lowNeighbor(0,0) );
 
-            for (unsigned j=lowNeighbor(1,0);j<(*mit)(1,0);j++)
+            for (unsigned j=(unsigned)lowNeighbor(1,0);j<(*mit)(1,0);j++)
             {
-                unsigned tempUnsigned = ceil(lowNeighbor(0,0) + ((double)(j-lowNeighbor(1,0)))/slope);
+                unsigned tempUnsigned = (unsigned)(ceil(lowNeighbor(0,0) + ((double)((double)j-lowNeighbor(1,0)))/slope));
                 //cout << "(*mit)(0,0) = " << (*mit)(0,0) << "    tempUnsigned = " << tempUnsigned << endl;
                 for (unsigned i=tempUnsigned;i<lowNeighbor(0,0);i++)
                 //for (unsigned i=(*mit)(0,0);i<lowNeighbor(0,0);i++)
@@ -1914,9 +1915,9 @@ set <Matrix, ltcolvec> ProjBalMatroidOpt::BoundaryTrianglesTwoDim ( set <Matrix,
         {
             double slope = ( (*mit)(1,0) - highNeighbor(1,0) ) / ( (*mit)(0,0) - highNeighbor(0,0) );
 
-            for (unsigned j=(*mit)(1,0);j<highNeighbor(1,0);j++)
+            for (unsigned j=(unsigned)(*mit)(1,0);j<(unsigned)highNeighbor(1,0);j++)
             {
-                unsigned tempUnsigned = ceil((*mit)(0,0) + ((double)(j-(*mit)(1,0)))/slope);
+                unsigned tempUnsigned = (unsigned)(ceil((*mit)(0,0) + ((double)(j-(*mit)(1,0)))/slope));
                 //cout << "highNeighbor(0,0) = " << highNeighbor(0,0) << "    tempUnsigned = " << tempUnsigned << endl;
                 for (unsigned i=tempUnsigned;i<(*mit)(0,0);i++)
                 //for (unsigned i=highNeighbor(0,0);i<(*mit)(0,0);i++)

@@ -44,7 +44,7 @@ set <Matrix, ltcolvec> Matroid::calcAllBasesProj(Matrix &Weight)
 
 set <unsigned> Matroid::GreedyAlgorithmMax(Matrix Weight)
 {
-    if (Weight.rows != getNumElements() || Weight.cols != 1)
+    if (Weight.rows != (unsigned)getNumElements() || Weight.cols != 1)
     {
         cerr << "Matroid::GreedyAlgorithmMax Weight not the appropriate dimension." << endl;
         exit (0);
@@ -56,12 +56,12 @@ set <unsigned> Matroid::GreedyAlgorithmMax(Matrix Weight)
     double maxWeight;
     unsigned maxWeightIndex;
 
-    for (unsigned i=0;i<getNumElements();i++)
+    for (unsigned i=0;i<(unsigned)getNumElements();i++)
     {
         validWeights.insert(i);
     }
 
-    while(maxBasis.size() != rank())
+    while(maxBasis.size() != (unsigned)rank())
     {
         suit = validWeights.begin();
         maxWeight = Weight(*suit,0);
@@ -76,7 +76,7 @@ set <unsigned> Matroid::GreedyAlgorithmMax(Matrix Weight)
             }
         }
         maxBasis.insert(maxWeightIndex);
-        if (maxBasis.size() != setRank(maxBasis))
+        if (maxBasis.size() != (unsigned)setRank(maxBasis))
         { // Can't add maxWeightIndex then. Remove it
             maxBasis.erase(maxBasis.find(maxWeightIndex));
         }
@@ -104,15 +104,15 @@ float Matroid::H_fn_logistic(float t){
   float d1, value1, d2, value2, max_value;
 
   left_point=0;
-  right_point=1-SOLVER_ACCURACY;
+  right_point=1-(float)SOLVER_ACCURACY;
   interval_range=2;     
   
   while(interval_range>SOLVER_ACCURACY){
     mid_point=(left_point+right_point)/2;
     d1=(left_point+mid_point)/2;
     d2=(right_point+mid_point)/2;
-    value1=t*d1-log(PI*d1/(sin(PI*d1)));
-    value2=t*d2-log(PI*d2/(sin(PI*d2)));
+    value1=t*d1-log((float)PI*d1/(sin((float)PI*d1)));
+    value2=t*d2-log((float)PI*d2/(sin((float)PI*d2)));
          if(value1>value2){
 	   right_point=mid_point;
 	   max_value=value1;
@@ -139,7 +139,7 @@ float Matroid::lower_logistic(float avg_GAMMA, int k){
 
   float lower_ans;
  
-  lower_ans=(k-1)*H_fn_logistic((float)avg_GAMMA/(k-1));
+  lower_ans=((float)(k-1))*H_fn_logistic((float)avg_GAMMA/(float)(k-1));
   return(lower_ans);
 }
 
@@ -327,9 +327,9 @@ set <Matrix, ltcolvec> GraphicalMatroid::calcAllBasesProj(Matrix &Weight)
     //cout << &edgeIndex << endl;
     graphRep.findChildrenSpanningTreeCount = 0;
     graphRep.findChildrenBFSLevel = 0;
-    time_t startTime = time(0);
+    //time_t startTime = time(0);
     findChildren(graphRep,*lsit, temps1, temps2, temps3, edgeIndex, Weight, projPoints, 100000,0);
-    time_t endTime = time(0);
+    //time_t endTime = time(0);
 
     return projPoints;
 }
@@ -420,7 +420,7 @@ int VectorMatroid::isBasis (set <unsigned> S)
     {
         return 0;
     }
-    if (S.size() > numElements)
+    if (S.size() > (unsigned)numElements)
     {
         return 0;
     }
@@ -444,7 +444,7 @@ int VectorMatroid::setRank (set <unsigned> S) //Returns the rank of the set
     {
         return 0;
     }
-    if (S.size() > numElements)
+    if (S.size() > (unsigned)numElements)
     {
         return 0;
     }
@@ -723,8 +723,8 @@ void VectorMatroid::initializePivotLAPACK(set <unsigned> initBasis)
     // where A_j is the element from the add set
     
     currentInitBasis = matrixRep.subColumns(initBasis);
-    double AT[currentInitBasis.rows*currentInitBasis.cols];
-    double b[currentInitBasis.rows];
+    double *AT = new double[currentInitBasis.rows*currentInitBasis.cols];
+    double *b = new double[currentInitBasis.rows];
 
     // Translate into column major order for FORTRAN LAPACK function
     for(unsigned i=0;i<currentInitBasis.cols;i++)
@@ -744,7 +744,7 @@ void VectorMatroid::initializePivotLAPACK(set <unsigned> initBasis)
 
     int INFO, LDA, LDB, N, NRHS;
     INFO = -1;
-    int IPIV[currentInitBasis.rows];
+    int *IPIV = new int[currentInitBasis.rows];
     LDA = currentInitBasis.rows;
     LDB = currentInitBasis.rows;
     N = currentInitBasis.rows;
@@ -797,6 +797,9 @@ void VectorMatroid::initializePivotLAPACK(set <unsigned> initBasis)
 
     remEl = currentCycle.begin();
     //cout << "Initialize done." << endl;
+    delete AT;
+    delete b;
+    delete IPIV;
 }
 
 int VectorMatroid::nextPivot (set <unsigned> &pivot)
@@ -894,8 +897,8 @@ int VectorMatroid::nextPivotLAPACK (set <unsigned> &pivot)
                 return 0;
             }
         }
-        double AT[currentInitBasis.rows*currentInitBasis.cols];
-        double b[currentInitBasis.rows];
+        double *AT = new double[currentInitBasis.rows*currentInitBasis.cols];
+        double *b = new double[currentInitBasis.rows];
 
         // Translate into column major order for FORTRAN LAPACK function
         for(unsigned i=0;i<currentInitBasis.cols;i++)
@@ -920,7 +923,7 @@ int VectorMatroid::nextPivotLAPACK (set <unsigned> &pivot)
 
         int INFO, LDA, LDB, N, NRHS;
         INFO = -1;
-        int IPIV[currentInitBasis.rows];
+        int *IPIV = new int[currentInitBasis.rows];
         LDA = currentInitBasis.rows;
         LDB = currentInitBasis.rows;
         N = currentInitBasis.rows;
@@ -977,6 +980,9 @@ int VectorMatroid::nextPivotLAPACK (set <unsigned> &pivot)
             suci++;
         }
         remEl = currentCycle.begin();
+        delete AT;
+        delete b;
+        delete IPIV;
 
     }
 
@@ -1026,7 +1032,7 @@ int GraphicalMatroid::isBasis (set <unsigned> someElements)
     {
         return 0;
     }
-    if (someElements.size() > numElements)
+    if (someElements.size() > (unsigned)numElements)
     {
         return 0;
     }
@@ -1167,7 +1173,7 @@ int GraphicalMatroid::setRank (set <unsigned> S) //Returns the rank of the set
     {
         return 0;
     }
-    if (S.size() > numElements)
+    if (S.size() > (unsigned)numElements)
     {
         return 0;
     }
@@ -1231,7 +1237,7 @@ UniformMatroid::UniformMatroid (int rank, int elements)
 
 int UniformMatroid::isBasis (set <unsigned> S)
 {
-    if (S.size() <= matroidRank)
+    if (S.size() <= (unsigned)matroidRank)
     {
         return 1;
     }
@@ -1243,9 +1249,9 @@ int UniformMatroid::isBasis (set <unsigned> S)
 
 int UniformMatroid::setRank (set <unsigned> S)
 {
-    if (S.size() <= matroidRank)
+    if (S.size() <= (unsigned)matroidRank)
     {
-        return S.size();
+        return (int)S.size();
     }
     else
     {
@@ -1257,7 +1263,7 @@ set <unsigned> UniformMatroid::randomBasis ()
 {
     set <unsigned> S;
 
-    while (S.size() < matroidRank)
+    while (S.size() < (unsigned)matroidRank)
     {
         S.insert(rand() % numElements);
     }

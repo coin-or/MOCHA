@@ -119,7 +119,7 @@ int main ()
         int numRand = 0;
 
         int row2, col2;
-        srand(time(0));
+        srand((unsigned int)time(0));
         cout << "Generating random edges" << endl;
         while (numRand < cols)
         {

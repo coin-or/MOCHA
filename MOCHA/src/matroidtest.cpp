@@ -78,15 +78,15 @@ int main (int argc, char *argv[])
     set < Matrix, ltcolvec> allBasesProj;
     set <Matrix, ltcolvec> CH;
     string openedFileName, S;
-    int TabuSearch = 0;
-    unsigned TabuSearchIterationLimit = 0;
+    //int TabuSearch = 0;
+    //unsigned TabuSearchIterationLimit = 0;
     int BFSEnumerate = 0;
     int SimAnn = 0;
-    int numAnnealings = 0;
+    //int numAnnealings = 0;
     int paretoBoundary = 0;
     int paretoBoundaryTriangle = 0;
-    int pivotTestType; // 1 is Local Search, 2 is Tabu Search 
-    int numPivotTests = 0;
+    int pivotTestType = 1; // 1 is Local Search, 2 is Tabu Search 
+    //int numPivotTests = 0;
     int paretoBFS = 0;
     int numPivots;
     int pivotLimit;
@@ -97,10 +97,10 @@ int main (int argc, char *argv[])
     list <set <unsigned> > SimAnnPivots;
     list <set <unsigned> > SimAnnMinBases;
     int AutoBOXTest = 0;
-    int AutoBOXTestSearches = 0;
+    //int AutoBOXTestSearches = 0;
     int AutoBOXTestTS = 0;
-    int AutoBOXTestSearchesTS = 0;
-    int AutoBOXTestTSLimit = 0;
+    //int AutoBOXTestSearchesTS = 0;
+    //int AutoBOXTestTSLimit = 0;
 
     int BOXTest = 0;
     int BOXTestSearches = 0;
@@ -119,7 +119,7 @@ int main (int argc, char *argv[])
     int POBoundaryRetryLimit;
 
 
-    srand(time(0));
+    srand((unsigned)time(0));
     if (argc >= 2)
     {
         inputfile.open(argv[1]);
@@ -261,7 +261,7 @@ int main (int argc, char *argv[])
         {
             cout << "Run Boundary Triangular Region Pareto search? ";
             cin >> S;
-            if (S == "Y" || S == "y" || S == "yes" || S == "YES" && choiceCount == 0)
+            if ((S == "Y" || S == "y" || S == "yes" || S == "YES") && choiceCount == 0)
             {
                 cout << "Number of tests for each point? ";
                 cin >> numPivots;
@@ -290,7 +290,7 @@ int main (int argc, char *argv[])
         {
             cout << "Run BFS Pareto search? ";
             cin >> S;
-            if (S == "Y" || S == "y" || S == "yes" || S == "YES" && choiceCount == 0)
+            if ((S == "Y" || S == "y" || S == "yes" || S == "YES") && choiceCount == 0)
             {
                 cout << "Number of searches? ";
                 cin >> POnumSearches;
@@ -308,7 +308,7 @@ int main (int argc, char *argv[])
         {
             cout << "Run BFS and Boundary Triangular Region Pareto search? ";
             cin >> S;
-            if (S == "Y" || S == "y" || S == "yes" || S == "YES" && choiceCount == 0)
+            if ((S == "Y" || S == "y" || S == "yes" || S == "YES") && choiceCount == 0)
             {
                 cout << "Number of searches? ";
                 cin >> POnumSearches;

@@ -20,7 +20,7 @@ using namespace::std;
 
 int main (int argc, char *argv[])
 {
-    srand(time(0));
+    srand((unsigned)time(0));
 
     ifstream inputFile;
     if (argc >= 2)

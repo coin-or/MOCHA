@@ -215,7 +215,7 @@ set <unsigned> Graph::randSpanningForest (int &cycleFree)
     while (nodeQueue.size() != 0)
     {
         nqi = nodeQueue.begin();
-        randIndex = (rand() % nodeQueue.size());
+        randIndex = (rand() % (unsigned)nodeQueue.size());
         u = *(nqi + randIndex);
         nodeQueue.erase((nqi + randIndex)); 
         //cout << "   u = " << u << endl;
@@ -459,7 +459,7 @@ Graph Graph::subGraphDiff(set <unsigned> &someEdges)
     set <unsigned> setDiff;
     set <unsigned>::const_iterator sit = someEdges.begin();
 
-    for (unsigned i=0;i<numEdges;i++)
+    for (unsigned i=0;i<(unsigned)numEdges;i++)
     {
         if (i == *sit && sit != someEdges.end())
         {
@@ -822,7 +822,10 @@ list <set <unsigned> > Graph::NagIbar ()
     list <set <unsigned> > edgePartitions(numEdges, emptySet);
 
     //matrix to know whether edges are scanned or not
-    int Unscanned[numNodes][numNodes];
+    int **Unscanned = new int*[numNodes];
+    for (int i=0;i<numNodes;i++){
+        Unscanned[i] = new int[numNodes];
+    }
     
     //initialize the matrix to say none of the edges are scanned
     int i, j;
@@ -832,7 +835,7 @@ list <set <unsigned> > Graph::NagIbar ()
 	if(j == i)
 	  Unscanned[i][j] = 0;
 	else
-	  Unscanned[i][j] = adjMatrix(i,j);
+	  Unscanned[i][j] = (int)adjMatrix(i,j);
       }
 
     //make buckets and put all vertex numbers in 0th bucket
@@ -842,7 +845,7 @@ list <set <unsigned> > Graph::NagIbar ()
     list <VertexBucket> Buckets(1, allVertices);
    
     //array to hold r-values for each vertex
-    int rvalues[numNodes];
+    int *rvalues = new int[numNodes];
     
     //initialize each r-value to 0
     for(i = 0; i < numNodes; i++)
@@ -903,6 +906,11 @@ list <set <unsigned> > Graph::NagIbar ()
         }
       }
     }
+    for (int i=0;i<numNodes;i++){
+        delete Unscanned[i];
+    }
+    delete Unscanned;
+    delete rvalues;
     return edgePartitions;
 }
 
@@ -914,9 +922,9 @@ Matrix Graph::calcEdgeIndex(list <set <unsigned> > &edgePartition)
     list <set <unsigned> >::const_iterator lsit = edgePartition.begin();
     unsigned labelIndex = 0;
     unsigned n1,n2;
-    for (unsigned i=0;i<numNodes;i++)
+    for (unsigned i=0;i<(unsigned)numNodes;i++)
     {
-        for (unsigned j=0;j<numNodes;j++)
+        for (unsigned j=0;j<(unsigned)numNodes;j++)
         {
             edgeIndex(i,j) = -1;
         }
@@ -946,7 +954,7 @@ unsigned Graph::MatsuiBottom(Matrix &edgeIndex, set <unsigned> &someEdges)
     unsigned currentMax;
     set <unsigned>::const_iterator sit = someEdges.begin();
     someEdge = edges[*sit];
-    currentMax = edgeIndex(someEdge[0],someEdge[1]);
+    currentMax = (unsigned)edgeIndex(someEdge[0],someEdge[1]);
     n1 = someEdge[0];
     n2 = someEdge[1];
 
@@ -955,7 +963,7 @@ unsigned Graph::MatsuiBottom(Matrix &edgeIndex, set <unsigned> &someEdges)
         someEdge = edges[*sit];
         if (edgeIndex(someEdge[0],someEdge[1]) > currentMax)
         {
-            currentMax = edgeIndex(someEdge[0],someEdge[1]);
+            currentMax = (unsigned)edgeIndex(someEdge[0],someEdge[1]);
             n1 = someEdge[0];
             n2 = someEdge[1];
         }
@@ -973,7 +981,7 @@ unsigned Graph::MatsuiBottom(Matrix &edgeIndex)
     unsigned currentMax;
     map <unsigned, vector <unsigned> >::const_iterator mvit = edges.begin();
     someEdge = (*mvit).second;
-    currentMax = edgeIndex(someEdge[0],someEdge[1]);
+    currentMax = (unsigned)edgeIndex(someEdge[0],someEdge[1]);
     n1 = someEdge[0];
     n2 = someEdge[1];
 
@@ -982,7 +990,7 @@ unsigned Graph::MatsuiBottom(Matrix &edgeIndex)
         someEdge = (*mvit).second;
         if (edgeIndex(someEdge[0],someEdge[1]) > currentMax)
         {
-            currentMax = edgeIndex(someEdge[0],someEdge[1]);
+            currentMax = (unsigned)edgeIndex(someEdge[0],someEdge[1]);
             n1 = someEdge[0];
             n2 = someEdge[1];
         }
@@ -1000,7 +1008,7 @@ unsigned Graph::MatsuiTop(Matrix &edgeIndex, set <unsigned> &someEdges)
     unsigned currentMin;
     set <unsigned>::const_iterator sit = someEdges.begin();
     someEdge = edges[*sit];
-    currentMin = edgeIndex(someEdge[0],someEdge[1]);
+    currentMin = (unsigned)edgeIndex(someEdge[0],someEdge[1]);
     n1 = someEdge[0];
     n2 = someEdge[1];
 
@@ -1009,7 +1017,7 @@ unsigned Graph::MatsuiTop(Matrix &edgeIndex, set <unsigned> &someEdges)
         someEdge = edges[*sit];
         if (edgeIndex(someEdge[0],someEdge[1]) < currentMin)
         {
-            currentMin = edgeIndex(someEdge[0],someEdge[1]);
+            currentMin = (unsigned)edgeIndex(someEdge[0],someEdge[1]);
             n1 = someEdge[0];
             n2 = someEdge[1];
         }
@@ -1027,7 +1035,7 @@ unsigned Graph::MatsuiTop(Matrix &edgeIndex)
     unsigned currentMin;
     map <unsigned, vector <unsigned> >::const_iterator mvit = edges.begin();
     someEdge = (*mvit).second;
-    currentMin = edgeIndex(someEdge[0],someEdge[1]);
+    currentMin = (unsigned)edgeIndex(someEdge[0],someEdge[1]);
     n1 = someEdge[0];
     n2 = someEdge[1];
 
@@ -1036,7 +1044,7 @@ unsigned Graph::MatsuiTop(Matrix &edgeIndex)
         someEdge = (*mvit).second;
         if (edgeIndex(someEdge[0],someEdge[1]) < currentMin)
         {
-            currentMin = edgeIndex(someEdge[0],someEdge[1]);
+            currentMin = (unsigned)edgeIndex(someEdge[0],someEdge[1]);
             n1 = someEdge[0];
             n2 = someEdge[1];
         }
@@ -1052,7 +1060,7 @@ unsigned Graph::getEdgeIndex(unsigned someEdge, Matrix &edgeIndex)
     unsigned n1,n2;
    
     edgeToNode(someEdge,n1,n2);
-    return edgeIndex(n1,n2);
+    return (unsigned)edgeIndex(n1,n2);
 }
 
 void findChildren(Graph &G, set <unsigned> &initTree, set <unsigned> &deltaf, set <unsigned> &deltag, set <unsigned> deltaH, Matrix &edgeIndex, Matrix &Weight, set <Matrix, ltcolvec> &projTrees, unsigned printMod, unsigned printTrees)
@@ -1126,7 +1134,7 @@ void findChildren(Graph &G, set <unsigned> &initTree, set <unsigned> &deltaf, se
     set_difference(thisT.begin(), thisT.end(), H.begin(), H.end(), insert_iterator< set <unsigned> >(thisTremH_TSet, thisTremH_TSet.begin()));
 
     // while (j <= min(jprime + 2n - 3,m) )
-    while (j <= jprime + 2*G.numNodes - 3 && j < G.numEdges)
+    while (j <= jprime + 2*G.numNodes - 3 && j < (unsigned)G.numEdges)
     {
         //cout << "   j = " << j << endl;
 
@@ -1140,12 +1148,12 @@ void findChildren(Graph &G, set <unsigned> &initTree, set <unsigned> &deltaf, se
         Graph::edgeToNodeEdgeIndex(j,n1,n2,edgeIndex); 
         //cout << "T-H: n1 = " << n1 << endl;
         //cout << "T-H: n2 = " << n2 << endl;
-        while ((j <= jprime + 2*G.numNodes - 3 && j < G.numEdges) && thisTremH_T->nodesConnected(n1,n2) == 1)
+        while ((j <= jprime + 2*G.numNodes - 3 && j < (unsigned)G.numEdges) && thisTremH_T->nodesConnected(n1,n2) == 1)
         {
             // Add function to properly ''increment'' according to edgeIndex
             //cout << "j++" << endl;
             j++;
-            if (j <= jprime + 2*G.numNodes - 3 && j < G.numEdges)
+            if (j <= jprime + 2*G.numNodes - 3 && j < (unsigned)G.numEdges)
             {
                 //cout << "Calling edgeToNodeEdgeIndex 2" << endl;
                 Graph::edgeToNodeEdgeIndex(j,n1,n2,edgeIndex); 
@@ -1154,7 +1162,7 @@ void findChildren(Graph &G, set <unsigned> &initTree, set <unsigned> &deltaf, se
         //cout << "Done with j++" << endl;
         delete thisTremH_T;
 
-        if (j <= jprime + 2*G.numNodes - 3 && j < G.numEdges)
+        if (j <= jprime + 2*G.numNodes - 3 && j < (unsigned)G.numEdges)
         {
             //cout << "   j <= jprime + 2*G.numNodes - 3 || j <= G.numEdges" << endl;
             //cout << "   j = " << j << endl;
@@ -1213,7 +1221,7 @@ void findChildren(Graph &G, set <unsigned> &initTree, set <unsigned> &deltaf, se
                 sit = D.begin();
                 unsigned currentMax,currentEdge;
                 G.edgeToNode(*sit,n1,n2);
-                currentMax = edgeIndex(n1,n2);
+                currentMax = (unsigned)edgeIndex(n1,n2);
                 currentEdge = *sit;
                 sit++;
                 for (;sit != D.end();sit++)
@@ -1221,7 +1229,7 @@ void findChildren(Graph &G, set <unsigned> &initTree, set <unsigned> &deltaf, se
                     G.edgeToNode(*sit,n1,n2);
                     if (edgeIndex(n1,n2) > currentMax)
                     {
-                        currentMax = edgeIndex(n1,n2);
+                        currentMax = (unsigned)edgeIndex(n1,n2);
                         currentEdge = *sit;
                     }
                 }
@@ -1322,7 +1330,7 @@ void findChildren(Graph &G, set <unsigned> &initTree, set <unsigned> &deltaf, se
     set_difference(thisT.begin(), thisT.end(), H.begin(), H.end(), insert_iterator< set <unsigned> >(thisTremH_TSet, thisTremH_TSet.begin()));
 
     // while (j <= min(jprime + 2n - 3,m) )
-    while (j <= jprime + 2*G.numNodes - 3 && j < G.numEdges)
+    while (j <= jprime + 2*G.numNodes - 3 && j < (unsigned)G.numEdges)
     {
         //cout << "   j = " << j << endl;
 
@@ -1336,12 +1344,12 @@ void findChildren(Graph &G, set <unsigned> &initTree, set <unsigned> &deltaf, se
         Graph::edgeToNodeEdgeIndex(j,n1,n2,edgeIndex); 
         //cout << "T-H: n1 = " << n1 << endl;
         //cout << "T-H: n2 = " << n2 << endl;
-        while ((j <= jprime + 2*G.numNodes - 3 && j < G.numEdges) && thisTremH_T->nodesConnected(n1,n2) == 1)
+        while ((j <= jprime + 2*G.numNodes - 3 && j < (unsigned)G.numEdges) && thisTremH_T->nodesConnected(n1,n2) == 1)
         {
             // Add function to properly ''increment'' according to edgeIndex
             //cout << "j++" << endl;
             j++;
-            if (j <= jprime + 2*G.numNodes - 3 && j < G.numEdges)
+            if (j <= jprime + 2*G.numNodes - 3 && j < (unsigned)G.numEdges)
             {
                 //cout << "Calling edgeToNodeEdgeIndex 2" << endl;
                 Graph::edgeToNodeEdgeIndex(j,n1,n2,edgeIndex); 
@@ -1350,7 +1358,7 @@ void findChildren(Graph &G, set <unsigned> &initTree, set <unsigned> &deltaf, se
         //cout << "Done with j++" << endl;
         delete thisTremH_T;
 
-        if (j <= jprime + 2*G.numNodes - 3 && j < G.numEdges)
+        if (j <= jprime + 2*G.numNodes - 3 && j < (unsigned)G.numEdges)
         {
             //cout << "   j <= jprime + 2*G.numNodes - 3 || j <= G.numEdges" << endl;
             //cout << "   j = " << j << endl;
@@ -1409,7 +1417,7 @@ void findChildren(Graph &G, set <unsigned> &initTree, set <unsigned> &deltaf, se
                 sit = D.begin();
                 unsigned currentMax,currentEdge;
                 G.edgeToNode(*sit,n1,n2);
-                currentMax = edgeIndex(n1,n2);
+                currentMax = (unsigned)edgeIndex(n1,n2);
                 currentEdge = *sit;
                 sit++;
                 for (;sit != D.end();sit++)
@@ -1417,7 +1425,7 @@ void findChildren(Graph &G, set <unsigned> &initTree, set <unsigned> &deltaf, se
                     G.edgeToNode(*sit,n1,n2);
                     if (edgeIndex(n1,n2) > currentMax)
                     {
-                        currentMax = edgeIndex(n1,n2);
+                        currentMax = (unsigned)edgeIndex(n1,n2);
                         currentEdge = *sit;
                     }
                 }

@@ -34,10 +34,10 @@ int main (int argc, char *argv[])
 
     unsigned rows,cols,low,high;
 
-    sscanf(argv[1],"%d",&rows);
-    sscanf(argv[2],"%d",&cols);
-    sscanf(argv[3],"%d",&low);
-    sscanf(argv[4],"%d",&high);
+    sscanf(argv[1],"%u",&rows);
+    sscanf(argv[2],"%u",&cols);
+    sscanf(argv[3],"%u",&low);
+    sscanf(argv[4],"%u",&high);
 
     cout << rows << endl << cols << endl;
     Matrix M(rows,cols,low,high+1);

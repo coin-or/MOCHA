@@ -23,7 +23,7 @@ int main (int argc, char* argv[])
     ifstream inputfile;
     char fileName[80];
     int printMod = 10000;
-    unsigned printTrees = 0;
+    int printTrees = 0;
 
     if (argc >= 2)
     {

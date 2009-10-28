@@ -3,12 +3,9 @@
 //
 // Distributed under the Eclipse Public License v 1.0. See ../LICENSE
 
-// $Rev: 317 $ $Date: 2009-10-01 12:09:15 -0400 (Thu, 01 Oct 2009) $
+// $Rev: 311 $ $Date: 2009-09-19 22:06:35 -0400 (Sat, 19 Sep 2009) $
 
 // matrix.h. Author David Haws
-
-
-/// \file matrix.h
 
 #ifndef MATRIX_H
 #define MATRIX_H 
@@ -85,10 +82,10 @@ public:
 
     double trace(); // Computes the trace
 
-    double det(); // Computes the determinant
-    double detCofactor(); // Computes the determinant using cofactor expansion
-    double detLU(); // Computes the determinant using SVD decomposition
-    double log_abs_det(); // Computes log(abs(det()));
+    long double det(); // Computes the determinant
+    long double detCofactor(); // Computes the determinant using cofactor expansion
+    long double detLU(); // Computes the determinant using SVD decomposition
+    long double log_abs_det(); // Computes log(abs(det()));
 
     // This uses dgesvd function of lapack to compute *this = U*S*V.transpose()
     void SVD(Matrix &U, Matrix &S, Matrix &V);

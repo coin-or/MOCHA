@@ -29,7 +29,7 @@ double MyFct (Matrix M)
 {
     double returnValue=0;
     
-    for (int i=0;i<MyFctMatrix.rows && i < M.rows;i++)
+    for (int i=0;i<(int)MyFctMatrix.rows && i < (int)M.rows;i++)
     {
         returnValue += (MyFctMatrix(i,0)-M(i,0))*(MyFctMatrix(i,0)-M(i,0));
     }
@@ -41,7 +41,7 @@ int main (int argc, char *argv[])
     ifstream inputfile;
     char fileName[80];
 
-    srand(time(0));
+    srand((unsigned)time(0));
     if (argc >= 2)
     {
         inputfile.open(argv[1]);

@@ -27,12 +27,12 @@ int main (int argc, char *argv[])
 
     Matrix A(P.rows,B.rows);
 
-    for (int i=0;i<A.rows;i++)
+    for (unsigned i=0;i<A.rows;i++)
     {
-        for (int j=0;j<A.cols;j++)
+        for (unsigned j=0;j<A.cols;j++)
         {
             A(i,j) = 1;
-            for (int l=0;l<B.cols;l++)
+            for (unsigned l=0;l<B.cols;l++)
             {
                 tempPow = pow(P(i,l),B(j,l));
                 // I don't think pow is returning 0^0 as 1! It should!

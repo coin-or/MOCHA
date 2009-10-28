@@ -3,14 +3,11 @@
 //
 // Distributed under the Eclipse Public License v 1.0. See ../LICENSE
 
-// $Rev: 317 $ $Date: 2009-10-01 12:09:15 -0400 (Thu, 01 Oct 2009) $
+// $Rev: 311 $ $Date: 2009-09-19 22:06:35 -0400 (Sat, 19 Sep 2009) $
 
 // matrix.h. Author David Haws
 // Taken from MOCHA package, which is distributed under the Eclipse 1.0 license.
 // See https://projects.coin-or.org/Mocha
-
-
-/// \file matrix.cpp
 
 #include <iostream>
 #include <iomanip>
@@ -203,13 +200,12 @@ double Matrix::operator() (unsigned row, unsigned col) const
     return Entries[row][col];
 } 
 
-
 std::ostream& operator<< (std::ostream& o, const Matrix& someMatrix)
 {
     ios::fmtflags oldFlags;
     int oldStreamSize;
 
-    oldStreamSize = o.precision(4);
+    oldStreamSize = (int)o.precision(4);
     oldFlags = o.setf (ios::fixed);
 
     for (unsigned i=0;i<someMatrix.rows;i++){
@@ -735,11 +731,11 @@ int Matrix::rank_LAPACK()
     {
         return 0;
     }
-    double AT[rows*cols];
-    double U[rows*cols];
-    double VT[rows*cols];
-    double S[min(rows,cols)];
-    double WORK[2*max(3*min(rows,cols) + max(rows,cols),5*min(rows,cols)-4)];
+    double *AT = new double[rows*cols];
+    double *U = new double[rows*cols];
+    double *VT = new double[rows*cols];
+    double *S = new double[min(rows,cols)];
+    double *WORK = new double[2*max(3*min(rows,cols) + max(rows,cols),5*min(rows,cols)-4)];
 
     char JOBU, JOBVT;
     int INFO, LDA, LDU, LDVT, LWORK, M, N;
@@ -795,6 +791,12 @@ int Matrix::rank_LAPACK()
         }
     }
 
+
+    delete AT ;
+    delete U;
+    delete VT;
+    delete S;
+    delete WORK;
     return non_zero_count;
 }
 
@@ -846,7 +848,7 @@ Matrix Matrix::subColumns(const set<unsigned> &colSet)
     }
     int colCount=0;
 
-    Matrix newM(rows,colSet.size());
+    Matrix newM(rows,(unsigned)colSet.size());
 
     //cout << "newM.cols=" << newM.cols << endl; 
     //newM.matrixRank = -1;
@@ -874,9 +876,7 @@ Matrix Matrix::subColumns(const set<unsigned> &colSet)
 
 Matrix Matrix::subColumnsDiff(const set<unsigned> &colSet)
 {
-    int colCount=0;
-
-    Matrix newM(rows,cols - colSet.size());
+    Matrix newM(rows,(unsigned)(cols - colSet.size()));
 
     //cout << "newM.cols=" << newM.cols << endl; 
     newM.matrixRank = -1;
@@ -1065,14 +1065,14 @@ void Matrix::SVD(Matrix &reU, Matrix &reS, Matrix &reV)
     {
         return;
     }
-    double AT[rows*cols];
+    double *AT = new double[rows*cols];
     reU = Matrix(rows,rows);
-    double U[rows*rows];
-    double VT[cols*cols];
+    double *U = new double[rows*rows];
+    double *VT = new double[cols*cols];
     reV = Matrix(cols,cols);
-    double S[min(rows,cols)];
+    double *S = new double[min(rows,cols)];
     reS = Matrix(rows,cols);
-    double WORK[2*max(3*min(rows,cols) + max(rows,cols),5*min(rows,cols)-4)];
+    double *WORK = new double[2*max(3*min(rows,cols) + max(rows,cols),5*min(rows,cols)-4)];
     for(unsigned i=0;i<cols;i++)
     {
         for(unsigned j=0;j<cols;j++)
@@ -1128,15 +1128,20 @@ void Matrix::SVD(Matrix &reU, Matrix &reS, Matrix &reV)
         }
     }
 
+    delete AT;
+    delete U;
+    delete VT;
+    delete S;
+    delete WORK;
 }
 
 double Matrix::LU(Matrix &P, Matrix &L, Matrix &U)
 {
     int M = rows;
     int N = cols;
-    double A[rows*cols];
+    double *A = new double[rows*cols];
     int LDA = M;
-    int IPIV[min(M,N)];
+    int *IPIV = new int[min(M,N)];
     int INFO;
     double sign=1; //Sign determined by number of row transposes
 
@@ -1177,8 +1182,8 @@ double Matrix::LU(Matrix &P, Matrix &L, Matrix &U)
         U = Matrix(M,M);
     }
 
-    for (unsigned i=0;i<min(M,N);i++){
-        for (unsigned j=0;j<min(M,N);j++){
+    for (unsigned i=0;i<(unsigned)min(M,N);i++){
+        for (unsigned j=0;j<(unsigned)min(M,N);j++){
             if (i > j){
                 L(i,j) = A[i+M*j];
             } 
@@ -1192,6 +1197,8 @@ double Matrix::LU(Matrix &P, Matrix &L, Matrix &U)
         }
     }
 
+    delete A;
+    delete IPIV;
     return sign;
 }
 
@@ -1217,7 +1224,7 @@ double Matrix::trace()
     return returnValue;
 }
 
-double Matrix::det()
+long double Matrix::det()
 {
     if (rows != cols){
         cout << "Matrix::detCofactor(): rows != cols" << endl;
@@ -1227,7 +1234,7 @@ double Matrix::det()
     //return detCofactor();
 }
 
-double Matrix::detCofactor()
+long double Matrix::detCofactor()
 {
     if (rows != cols){
         cout << "Matrix::detCofactor(): rows != cols" << endl;
@@ -1236,9 +1243,9 @@ double Matrix::detCofactor()
     if (rows == 1 && cols == 1){
         return Entries[0][0];
     }
-    double returnValue=0;;
+    long double returnValue=0;;
     // Do cofactor expansion on first row
-    double sign = 1;
+    long double sign = 1;
     for (unsigned i=0;i<cols;i++){
         //cout << "detCofactor i=" << i << endl;
         returnValue += sign*((this->cofactor(0,i)).det());
@@ -1275,9 +1282,9 @@ Matrix Matrix::cofactor(unsigned i, unsigned j)
     return returnMatrix;
 }
 
-double Matrix::detLU()
+long double Matrix::detLU()
 {
-    double returnValue=1;
+    long double returnValue=1;
 
     if (rows != cols) {
         cout << "Matrix::detCofactor(): rows != cols" << endl;
@@ -1295,9 +1302,9 @@ double Matrix::detLU()
     return returnValue*sign;
 }
 
-double Matrix::log_abs_det()
+long double Matrix::log_abs_det()
 {
-    double returnValue=0;
+    long double returnValue=0;
 
     if (rows != cols) {
         cout << "Matrix::detCofactor(): rows != cols" << endl;
@@ -1310,7 +1317,7 @@ double Matrix::log_abs_det()
     double sign;
     sign = LU(P,L,U);
     for (unsigned i=0;i<rows;i++){
-        returnValue += log(fabs(U(i,i)));
+        returnValue += (double)log((double)fabs((double)U(i,i)));
     }
     return returnValue;
 }

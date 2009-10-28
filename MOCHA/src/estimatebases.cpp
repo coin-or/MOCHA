@@ -16,7 +16,7 @@
 
 int main (int argc, char *argv[])
 {
-	int m, num_rows, num_cols, i, j, k, max_weight;
+	int m, num_rows, i, k, max_weight;
 	float upper_bound, lower_bound, GAMMA, avg_GAMMA;
 	string filename;
     string matroidType;
@@ -66,7 +66,7 @@ int main (int argc, char *argv[])
 
 	//int matrix[num_rows][num_cols];
 
-    Matroid *M;
+    Matroid *M = 0;
 
     if (argc > 2)
     {
@@ -122,7 +122,7 @@ int main (int argc, char *argv[])
 	GAMMA=0;
 	srand((unsigned)time(NULL));
 
-    int ten_percent = floor(m*0.10);
+    int ten_percent = (int)floor(m*0.10);
     ten_percent = (int)max((double)1,(double)ten_percent);
     cout << "ten_percent = " << ten_percent << endl;
 	for(k=0;k<m;k++){
@@ -151,15 +151,15 @@ int main (int argc, char *argv[])
         //cout << "Adding to max_weight." << endl;
 		for(it = max_weight_basis.begin(); it != max_weight_basis.end(); it++)
 		{
-			max_weight += weights(*it,0);
+			max_weight += (int)weights(*it,0);
 		}
   
-		GAMMA=GAMMA+max_weight;
+		GAMMA=GAMMA+(float)max_weight;
 	}
     cout << "  100%" << endl;
 
 	//compute upper and lower estimates
-	avg_GAMMA = (float)GAMMA/m;
+	avg_GAMMA = (float)GAMMA/(float)m;
 	upper_bound = M->upper_logistic(avg_GAMMA, num_rows);
 	lower_bound = M->lower_logistic(avg_GAMMA, num_rows);
 
