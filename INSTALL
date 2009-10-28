@@ -27,6 +27,12 @@ resolved by compiling GMP using 32-bit binaries using ./configure ABI=32.
 Alternitively MOCHA can be compiled to generate 64-bit code using ./configure
 CXXFLAGS=-m64 LDFLAGS=-m64 (tested on linux and Mac).
 
+Alternatively you can retrieve BLAS and LAPACK using the scripts
+ThirdParty/Blas/get.Blas and ThirdParty/Lapack/get.Lapack.
+Then use the ./configure options
+--with-blas=BUILD
+--with-lapack=BUILD
+
 
 
 *----------------- Quick Example: -----------------*
