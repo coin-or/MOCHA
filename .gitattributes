@@ -2,6 +2,7 @@
 /INSTALL -text
 /LICENSE -text
 MOCHA/AUTHORS -text
+MOCHA/INSTALL -text
 MOCHA/Instances/Calibration/README -text
 MOCHA/Instances/Calibration/gn10e22 -text
 MOCHA/Instances/Calibration/gn10e22d2w0w100.mo -text
@@ -597,8 +598,10 @@ MOCHA/Instances/Solids/Solid-truncatedtetrahedron-d2w0w20.mo -text
 MOCHA/Instances/Solids/Solid-truncatedtetrahedron-d3w0w100.mo -text
 MOCHA/Instances/Solids/Solid-truncatedtetrahedron-d3w0w1000.mo -text
 MOCHA/Instances/Solids/Solid-truncatedtetrahedron-d3w0w20.mo -text
+MOCHA/LICENSE -text
 MOCHA/Makefile.am -text
 MOCHA/Makefile.in -text
+MOCHA/README -text
 MOCHA/TODO -text
 MOCHA/acinclude.m4 -text
 MOCHA/aclocal.m4 -text

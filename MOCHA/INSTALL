@@ -1,0 +1,87 @@
+*----------------- Installation instructions: -----------------*
+
+./configure
+make
+make install
+
+
+
+*----------------- Third-party software dependencies: -----------------*
+GMP, LAPACK, BLAS. 
+MOCHA can compile without GMP, though some functionality will be lost such as
+rank calculation using arbitrary precision arithmetic.
+
+If these packages are not installed systemwide then use the ./configure options
+--with-gmp=[Path to gmp, "no" disables GMP]
+--with-blas-prefix=[Path to blas]
+--with-lapack-prefix=[Path to lapack]
+
+If the GMP package is not found (whether the path was specified or not), MOCHA will compile
+without GMP based routines.
+
+Note that GMP must be compiled with the --enable-cxx option. 
+
+Also be warned that GMP may be compiled for 64-bit binaries, which may cause
+conflicts if your system compiles binaries in 32-bit by default. This can be
+resolved by compiling GMP using 32-bit binaries using ./configure ABI=32.
+Alternitively MOCHA can be compiled to generate 64-bit code using ./configure
+CXXFLAGS=-m64 LDFLAGS=-m64 (tested on linux and Mac).
+
+Alternatively you can retrieve BLAS and LAPACK using the scripts
+ThirdParty/Blas/get.Blas and ThirdParty/Lapack/get.Lapack.
+Then use the ./configure options
+--with-blas=BUILD
+--with-lapack=BUILD
+
+
+
+*----------------- Quick Example: -----------------*
+Quick Example:
+The file 'Instances/Examples/k6.mo' contains the complete graph on six nodes
+with random integral weights from 0 - 4.
+
+Since it is a graph, and relatively small, first output all the projected bases.
+All commands below assume they are executed from the main package directory
+'mocha-0.9'.
+run
+'src/matroidtest Instances/Examples/k6.mo'
+Say no to everything except:
+"Calculate all projected bases using brute-force enumeration. (Graphical only)? (y/n)"
+and 
+"Output matlab file? (y/n)". Specify some filename to write the output to.
+The output for the above command should match the file
+'Instances/Examples/k6.allprojectedbases.m'. There should be 225 projected bases.
+
+Now use MOCHA's Different Fiber BFS heuristic to try to get as many of these 225 
+projected bases as possible. 
+run
+'src/matroidtest Instances/Examples/k6.mo'
+When asked "Different Fiber BFS Enumerations? (y/n)" enter "y", then 100 searches, BFS depth 
+of 4, Interior retry limit 100, and Boundary retry limit 100. Say no to everything else 
+except answer yes to "Output matlab file? (y/n)". Specify some filename to write the output to.
+The file 'Instances/Examples/k6.dfbfsoutput.m' contains a sample run of DFBFS heuristic,
+which found all 225 projected bases. This procedure may not produce all 225 projected
+bases, and the sample outputfile provided may not match yours.
+
+Now use MOCHA's Pivot Test heuristc (using Tabu Search) to try to get as many of the
+225 projected bases as possible.
+run
+'src/matroidtest Instances/Examples/k6.mo'
+When asked "Run Auto Box Pivot Heuristic (Tabu Search)? (y/n)" enter "y", then specify
+10 attempts per point and Tabu Search limit of 20. Say no to everything else except
+"Output matlab file? (y/n)". Specify some filename to write the output to.
+The file 'Instances/Examples/k6.pivottesttabusearch.m' contains a sample run of
+Pivot Test using Tabu Search, which found 224 of the 225 projected bases. This
+procedure may not produce all 225 projected bases, and the sample outputfile
+provided may not match yours.
+
+Now use MOCHA's Boundary heuristics to find all vertices (and potentially some extreme
+points) of the convex hull of all projected bases. This heuristic is only available
+when there are two weightings.
+run
+'src/matroidtest Instances/Examples/k6.mo'
+When asked "Run Boundary Calculation (dim=2 only)?" answer "y". Answer "y" to "Output 
+matlab file? (y/n)". Specify some filename to write the output to.
+Compare the output with the file 'Instances/Examples/k6.boundary.m' which contains
+a sample run. The outputs may differ since MOCHA's Boundary heuristic is
+randomized, but it is guaranteed to contain the vertices.
