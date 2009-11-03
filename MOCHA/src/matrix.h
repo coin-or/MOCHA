@@ -3,7 +3,7 @@
 //
 // Distributed under the Eclipse Public License v 1.0. See ../LICENSE
 
-// $Rev: 311 $ $Date: 2009-09-19 22:06:35 -0400 (Sat, 19 Sep 2009) $
+// $Rev$ $Date$
 
 // matrix.h. Author David Haws
 
@@ -100,8 +100,8 @@ public:
     // Uses LAPACK and calls dgesvd_. Counts number of singular values
     // that are not < 10^-16 * SIGMA_MAX
     int rank_LAPACK (); 
-    int getCols ();
-    int getRows ();
+    const int getCols ();
+    const int getRows ();
     //double det();
     // Swaps columns i and j
     void swapCols(unsigned i, unsigned j);

@@ -3,7 +3,7 @@
 //
 // Distributed under the Eclipse Public License v 1.0. See ../LICENSE
 
-// $Rev: 311 $ $Date: 2009-09-19 22:06:35 -0400 (Sat, 19 Sep 2009) $
+// $Rev$ $Date$
 
 // matrix.h. Author David Haws
 // Taken from MOCHA package, which is distributed under the Eclipse 1.0 license.
@@ -977,12 +977,12 @@ Matrix  Matrix::operator- (const Matrix &B) const
 
 }
 
-int Matrix::getCols ()
+const int Matrix::getCols ()
 {
     return cols;
 }
 
-int Matrix::getRows ()
+const int Matrix::getRows ()
 {
     return rows;
 }

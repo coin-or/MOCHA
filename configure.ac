@@ -2,7 +2,7 @@
 # All Rights Reserved.
 # This file is distributed under the Eclipse Public License.
 
-## $Id$
+## $Id: configure.ac 44 2009-10-26 19:17:02Z dchaws $
 
 # Author:  David Haws           University of Kentucky, 10/26/09 
 

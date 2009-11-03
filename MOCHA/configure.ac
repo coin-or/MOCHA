@@ -3,7 +3,7 @@
 # All Rights Reserved.
 # This file is distributed under the Eclips Public License v 1.0
 
-## $Id$
+## $Id: configure.ac 48 2009-10-27 19:06:48Z andreasw $
 
 # Authors:  David Haws      University of California at Davis   2009-10-27
 

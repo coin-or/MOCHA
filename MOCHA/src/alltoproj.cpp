@@ -3,7 +3,7 @@
 //
 // Distributed under the Eclipse Public License v 1.0. See ../LICENSE
 
-// $Rev: 315 $ $Date: 2009-09-22 21:12:42 -0400 (Tue, 22 Sep 2009) $
+// $Rev$ $Date$
 // This file is meant to convert the output of findChildren printing all spanning
 // trees and project them by some given weighting.
 // Expects input to be sets given by unsigned ints on each line.

@@ -2,7 +2,7 @@
 # All Rights Reserved.
 # This file is distributed under the Eclipse Public License.
 
-## $Id$
+## $Id: Makefile.am 43 2009-10-26 19:15:22Z dchaws $
 
 # Author: David Haws, University of Kentucky, 10/26/09
 
