@@ -17,6 +17,13 @@
 #include <iostream>
 #include <set>
 
+/* cannot have gmpxx without gmp */
+#ifndef HAVE_LIBGMP
+#ifdef HAVE_LIBGMPXX
+#undef HAVE_LIBGMPXX
+#endif
+#endif
+
 #ifdef HAVE_LIBGMPXX
 #include <gmpxx.h>
 #endif
