@@ -1,0 +1,13 @@
+if [ -x ../src/matroidtest ] 
+then
+    if [ -e ../Instances/Examples/k6.mo ] 
+    then
+        ../src/matroidtest ../Instances/Examples/k6.mo < unitTestInput.txt
+    else
+        echo "File ../Instances/Examples/k6.mo does not exist to use as input for unit test."
+        exit -1
+    fi
+else
+    echo "File ../src/matroid test does not exist or is not executable"
+    exit -1
+fi

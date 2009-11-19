@@ -639,6 +639,9 @@ MOCHA/src/nagibatest.cpp -text
 MOCHA/src/point2po.cpp -text
 MOCHA/src/tabusearch.cpp -text
 MOCHA/src/testmatrix.cpp -text
+MOCHA/test/Makefile.am -text
+MOCHA/test/run_unitTests -text
+MOCHA/test/unitTestInput.txt -text
 /Makefile.am -text
 /Makefile.in -text
 /README -text
