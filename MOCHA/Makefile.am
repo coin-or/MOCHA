@@ -11,6 +11,10 @@ AUTOMAKE_OPTIONS = foreign
 
 SUBDIRS = src
 
+if ALWAYS_FALSE
+   SUBDIRS += test
+endif
+
 docdir = ${datadir}/doc/${PACKAGE}
 dist_doc_DATA = README
 EXTRA_DIST=LICENSE \
@@ -610,3 +614,7 @@ Instances/Examples/k6.graph\
 Instances/Examples/k6.mo\
 Instances/Examples/k6.pivottesttabusearch.m
 
+test: unitTest
+
+unitTest: all
+	cd test; $(MAKE) test
