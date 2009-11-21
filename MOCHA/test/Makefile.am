@@ -11,7 +11,7 @@ AUTOMAKE_OPTIONS = foreign
 ########################################################################
 
 test: 
-	chmod u+x ./run_unitTests
+	chmod u+x run_unitTests
 	./run_unitTests
 
 unitTest: test
