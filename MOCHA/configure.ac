@@ -138,11 +138,13 @@ AS_IF([test "x$with_gmp" != xno],
 
 
 AC_CONFIG_HEADERS([config.h])
-AC_COIN_VPATH_LINK(test/run_unitTests)
+AC_COIN_VPATH_LINK(Instances/Examples/k6.mo)
+AC_COIN_VPATH_LINK(test/unitTestInput.txt)
 AC_CONFIG_FILES([
  Makefile
  src/Makefile
  test/Makefile
+ test/run_unitTests
 ])
 
 AC_COIN_FINALIZE

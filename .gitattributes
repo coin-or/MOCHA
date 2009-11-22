@@ -641,7 +641,7 @@ MOCHA/src/tabusearch.cpp -text
 MOCHA/src/testmatrix.cpp -text
 MOCHA/test/Makefile.am -text
 MOCHA/test/Makefile.in -text
-MOCHA/test/run_unitTests -text
+MOCHA/test/run_unitTests.in -text
 MOCHA/test/unitTestInput.txt -text
 /Makefile.am -text
 /Makefile.in -text

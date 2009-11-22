@@ -1,6 +1,8 @@
+srcdir="@srcdir@"
+
 if [ -x ../src/matroidtest ] 
 then
-    if [ -e ../Instances/Examples/k6.mo ] 
+    if [ -f ../Instances/Examples/k6.mo ] 
     then
         ../src/matroidtest ../Instances/Examples/k6.mo < unitTestInput.txt
     else
