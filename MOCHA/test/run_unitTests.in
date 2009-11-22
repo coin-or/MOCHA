@@ -4,7 +4,7 @@ if [ -x ../src/matroidtest ]
 then
     if [ -f ../Instances/Examples/k6.mo ] 
     then
-        ../src/matroidtest ../Instances/Examples/k6.mo < unitTestInput.txt
+        ../src/matroidtest ../Instances/Examples/k6.mo < unitTestInput.txt > tmpoutput.txt
     else
         echo "File ../Instances/Examples/k6.mo does not exist to use as input for unit test."
         exit -1
@@ -12,4 +12,13 @@ then
 else
     echo "File ../src/matroid test does not exist or is not executable"
     exit -1
+fi
+
+# Now check the output.
+grep "BFSResults.size()" tmpoutput.txt 2>&1 
+if [ $? = 0 ]
+then
+    echo "Test passed."
+    rm -rf tmpoutput.txt
+    exit 0
 fi
