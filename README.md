@@ -98,38 +98,38 @@ projected bases in some cases).
 
 ## How MOCHA works
 Data Format:
-    The input format for MOCHA is a text file in the following format:
+The input format for MOCHA is a text file in the following format:
 ```
-        <MATROID TYPE>
-        <MATROID DESCRIPTION>
-        ...
-        <Number of weightings/criteria>
-        <Number of matroid elements>
-        <#> <#>  ... <#>
-        <#> <#>  ... <#>
-        ...
-        <#> <#>  ... <#>
+<MATROID TYPE>
+<MATROID DESCRIPTION>
+...
+<Number of weightings/criteria>
+<Number of matroid elements>
+<#> <#>  ... <#>
+<#> <#>  ... <#>
+...
+<#> <#>  ... <#>
 ```
 
 Example (Instances/Calibration/gn9e18d2w0w20.mo):
 ```
-    GRAPH
-    ADJACENCY
-    9
-    9
-    1   0   0   0   0   1   0   1   0
-    0   1   0   0   1   1   1   1   0 
-    0   0   1   0   0   0   0   1   0 
-    0   0   0   1   1   0   0   1   0 
-    0   1   0   1   1   1   1   1   0 
-    1   1   0   0   1   1   1   1   1 
-    0   1   0   0   1   1   1   1   1 
-    1   1   1   1   1   1   1   1   1 
-    0   0   0   0   0   1   1   1   1 
-    2
-    18
-    18   1   7   1   8   7  14  17   6   9  20   6  10   3   8   5   4  16 
-    1  18   0   4  16  17  19   1  18   5   1  11   4  17  10   9  19  16 
+GRAPH
+ADJACENCY
+9
+9
+1   0   0   0   0   1   0   1   0
+0   1   0   0   1   1   1   1   0 
+0   0   1   0   0   0   0   1   0 
+0   0   0   1   1   0   0   1   0 
+0   1   0   1   1   1   1   1   0 
+1   1   0   0   1   1   1   1   1 
+0   1   0   0   1   1   1   1   1 
+1   1   1   1   1   1   1   1   1 
+0   0   0   0   0   1   1   1   1 
+2
+18
+18   1   7   1   8   7  14  17   6   9  20   6  10   3   8   5   4  16 
+1  18   0   4  16  17  19   1  18   5   1  11   4  17  10   9  19  16 
 ```
 
 MATROID TYPE can be either "GRAPH" or "VECTOR".
@@ -137,37 +137,37 @@ If the type is "GRAPH" then the next line should be "ADJACENCY".
 Following this the adjacency representation of the graph should follow.
 It should be in the format:
 ```
-  <Number of rows>
-  <Number of columns>
+<Number of rows>
+<Number of columns>
 ```
 followed by an appropriate row and column of numbers.
 
 If the type is "VECTOR" then the following lines should be a matrix given as
 ```
-    <Number of rows>
-    <Number of columns>
+<Number of rows>
+<Number of columns>
 ```
 followed by an appropriate row and column of numbers.
 
 After the matroid type is specified, the weight is given as a matroid given as
 ```
-    <Number of rows>
-    <Number of columns>
+<Number of rows>
+<Number of columns>
 ```
 followed by an appropriate row and column of numbers.
 
 An example of a vector matroid representation is:
 ```
-    VECTOR
-    3
-    10
-    0   6   8   7   0  10   6  10   9  10 
-    3   2   0   6  10   3   5   1   5   5 
-    4   5   4   9   1   0   1   7  10   6 
-    2
-    10
-    1   7   1   5   7   8   3   7   5   2 
-    3   8   7   7   0   6   5   3   8   5 
+VECTOR
+3
+10
+0   6   8   7   0  10   6  10   9  10 
+3   2   0   6  10   3   5   1   5   5 
+4   5   4   9   1   0   1   7  10   6 
+2
+10
+1   7   1   5   7   8   3   7   5   2 
+3   8   7   7   0   6   5   3   8   5 
 ```
 
 ### What MOCHA does
@@ -205,155 +205,155 @@ some simple examples demonstrating our software.
 
 ### Detailed How-To/Example
 
-    To reproduce most of the tests in our paper, only three programs
-    are needed 'matroidtest', 'localsearch', and 'tabusearch'. Below
-    we give instructions how to reproduce experiments shown in our
-    paper.
+To reproduce most of the tests in our paper, only three programs
+are needed 'matroidtest', 'localsearch', and 'tabusearch'. Below
+we give instructions how to reproduce experiments shown in our
+paper.
 
-    The program 'matroidtest' has the capability of running the 
-    following algorithms: Different Fiber BFS, Pivot Test, Projected 
-    Boundary Calculation, Pareto Calculation, and Brute force 
-    projected bases calculation (Graphs only). See our paper for
-    a full description of these algorithms. 'matroidtest' has the 
-    option to output all computed points in a MATLAB ready file
-    which will plot the points.
+The program 'matroidtest' has the capability of running the 
+following algorithms: Different Fiber BFS, Pivot Test, Projected 
+Boundary Calculation, Pareto Calculation, and Brute force 
+projected bases calculation (Graphs only). See our paper for
+a full description of these algorithms. 'matroidtest' has the 
+option to output all computed points in a MATLAB ready file
+which will plot the points.
 
-    The program 'matroidtest' can be run with no arguments. It is
-    interactive and will ask which algorithms to run. If more than
-    one are selected, e.g. DFBFS and Boundary calculation, then
-    all the points will be output to the same file, with different
-    labels.
+The program 'matroidtest' can be run with no arguments. It is
+interactive and will ask which algorithms to run. If more than
+one are selected, e.g. DFBFS and Boundary calculation, then
+all the points will be output to the same file, with different
+labels.
 
-    'matroidtest' can also be invoked as:
+'matroidtest' can also be invoked as:
 ```
-        matroidtest <inputfile>
+matroidtest <inputfile>
 ```
-        or 
+or 
 ```
-        matroidtest <inputfile> <outputfile>
+matroidtest <inputfile> <outputfile>
 ```
 
 
 ### Different Fiber BFS
 
-        Run 'matroidtest'. Specify the input file either in the command line or
-        when prompted. Next it will ask "Different Fiber BFS Enumerations?
-        (y/n)". Enter "y". It will ask for the number of searches. This is the
-        number of DFBFS searches to perform on the interior and boundary.
-        'matroidtest' will perform this number of searches using (pseudo)random
-        projected boundary points. Next, 'matroidtest' starts at a random
-        unvisited projected base a number of times specified above.  Next
-        'matroidtest' will ask for the BFS depth. This is the recursion level
-        that DFBFS will terminate at.  Following this, 'matroidtest' will ask
-        for the "Interior Random retry limit?".  This is the limit of how many
-        times DFBFS will try to find a new random projected bases before
-        giving up. 'matroidtest' will then ask for the "Boundary random retry
-        limit?". This is the number of times DFBFS will try to find a new
-        random projected base on the boundary before giving up. When prompted
-        for all other algorithms/test, enter "n". When prompted for the output
-        file, give a name. Alternatively enter the output filename as the
-        second command-line argument.
+Run 'matroidtest'. Specify the input file either in the command line or
+when prompted. Next it will ask "Different Fiber BFS Enumerations?
+(y/n)". Enter "y". It will ask for the number of searches. This is the
+number of DFBFS searches to perform on the interior and boundary.
+'matroidtest' will perform this number of searches using (pseudo)random
+projected boundary points. Next, 'matroidtest' starts at a random
+unvisited projected base a number of times specified above.  Next
+'matroidtest' will ask for the BFS depth. This is the recursion level
+that DFBFS will terminate at.  Following this, 'matroidtest' will ask
+for the "Interior Random retry limit?".  This is the limit of how many
+times DFBFS will try to find a new random projected bases before
+giving up. 'matroidtest' will then ask for the "Boundary random retry
+limit?". This is the number of times DFBFS will try to find a new
+random projected base on the boundary before giving up. When prompted
+for all other algorithms/test, enter "n". When prompted for the output
+file, give a name. Alternatively enter the output filename as the
+second command-line argument.
 
-        Here is a quick example:
+Here is a quick example:
 
-        Run the following command from the src/ directory: 
+Run the following command from the src/ directory: 
 ```
-        ./matroidtest ../Instances/Calibration/gn11e20d2w0w100.mo tmpout.m
-```
-
-        Enter the following sequence of input:
-```
-        y
-        100
-        8
-        10000
-        100
-        n
-        n
-        n
-        n
-        n
-        n
-        n
+./matroidtest ../Instances/Calibration/gn11e20d2w0w100.mo tmpout.m
 ```
 
-        This will run DFBFS 100 times, with a truncation level of 8, an
-        interior retry limit of 10000, and a boundary retry limit of 100.
-        Typically it takes MOCHA longer to find a random projected boundary
-        point than an interior point.  It will write the outputed points to
-        tmpout.m. In MATLAB execute 'tmpout.m'.
-    
+Enter the following sequence of input:
+```
+y
+100
+8
+10000
+100
+n
+n
+n
+n
+n
+n
+n
+```
+
+This will run DFBFS 100 times, with a truncation level of 8, an
+interior retry limit of 10000, and a boundary retry limit of 100.
+Typically it takes MOCHA longer to find a random projected boundary
+point than an interior point.  It will write the outputed points to
+tmpout.m. In MATLAB execute 'tmpout.m'.
+
 ### Local Search/Tabu Search
 
-        The objective for local/tabu search must be hard coded into the files
-        localsearch.cpp and tabusearch.cpp and recompiled. By default the
-        object function is set to x^2. We did not want to spend excessive time
-        implementing or including a bulky format to read in arbitrary objective
-        functions. To change the objective function, study the function "MyFct"
-        in localsearch.cpp or tabusearch.cpp.
+The objective for local/tabu search must be hard coded into the files
+localsearch.cpp and tabusearch.cpp and recompiled. By default the
+object function is set to x^2. We did not want to spend excessive time
+implementing or including a bulky format to read in arbitrary objective
+functions. To change the objective function, study the function "MyFct"
+in localsearch.cpp or tabusearch.cpp.
 
-        localsearch and tabusearch are fully interactive and will ask for all
-        the necessary arguments. Alternatively they can be invoked as 
+localsearch and tabusearch are fully interactive and will ask for all
+the necessary arguments. Alternatively they can be invoked as 
 ```
 localsearch <inputfile> <outputfile> <number of searches>
 
 tabusearch <inputfile> <outputfile> <number of searches> <tabu searchlimit>
 ```
-        Again, the output files are written in MATLAB format which can
-        be run to display graphically the local and tabu searches. 
+Again, the output files are written in MATLAB format which can
+be run to display graphically the local and tabu searches. 
 
-        Example from within /src/ directory:
+Example from within /src/ directory:
 ```
 ./localsearch ../Instances/Calibration/gn11e20d2w0w20.mo tmp.m 100
 ```
-        This will use gn11e20d2w0w20.mo as input, output to the file tmp.m
-        and run 100 local searches.
+This will use gn11e20d2w0w20.mo as input, output to the file tmp.m
+and run 100 local searches.
 
 ### Auto Box Pivot Heuristic
-   
-        This will perform the Pivot Test described in our paper. Run 
-        'matroidtest', specify input and output files and when asked
-        "Run Auto Box Pivot Heuristic (Local Search)? (y/n)" or
-        "Run Auto Box Pivot Heuristic (Tabu Search)? (y/n)" select
-        y according to which pivot heuristic you want to use. 'matroidtest'
-        will then ask for the number of times to run local search or
-        tabu search on each point. For tabu search, 'matroidtest' will 
-        also ask for the tabu search limit. The auto box pivot heuristic
-        will then automatically calculate an appropriate bounding box of
-        the projected bases using 2(number of weightings) local searches.
 
-        An example run (for localsearch) would be as follows:
+This will perform the Pivot Test described in our paper. Run 
+'matroidtest', specify input and output files and when asked
+"Run Auto Box Pivot Heuristic (Local Search)? (y/n)" or
+"Run Auto Box Pivot Heuristic (Tabu Search)? (y/n)" select
+y according to which pivot heuristic you want to use. 'matroidtest'
+will then ask for the number of times to run local search or
+tabu search on each point. For tabu search, 'matroidtest' will 
+also ask for the tabu search limit. The auto box pivot heuristic
+will then automatically calculate an appropriate bounding box of
+the projected bases using 2(number of weightings) local searches.
 
-        Run the command from the src/ directory: 
+An example run (for localsearch) would be as follows:
+
+Run the command from the src/ directory: 
 ```
 ./matroidtest ../Instances/Calibration/gn11e20d2w0w100.mo tmpout.m
 ```
-        Enter the following sequence of input:
+Enter the following sequence of input:
 ```
-        n
-        y
-        20
-        n
-        n
-        n
-        n
-        n
-        n
+n
+y
+20
+n
+n
+n
+n
+n
+n
 ```
-        This will run the auto box pivot heuristic using local search using
-        20 attempts for each point.
+This will run the auto box pivot heuristic using local search using
+20 attempts for each point.
 
 ### Box Pivot Heuristic 
 
-        This is much the same as the Autobox heuristic above in 'matroidtest'
-        except that the user is prompted for coordinates of a box of points
-        to test using Pivot Test.
+This is much the same as the Autobox heuristic above in 'matroidtest'
+except that the user is prompted for coordinates of a box of points
+to test using Pivot Test.
 
 ### Boundary Calculation
 
-        When there are only two criteria/weightings 'matroidtest' can 
-        calculate the boundary (and more) of the projected bases. When asked
-        "Run Boundary Calculation (dim=2 only)? (y/n)" enter "y".
+When there are only two criteria/weightings 'matroidtest' can 
+calculate the boundary (and more) of the projected bases. When asked
+"Run Boundary Calculation (dim=2 only)? (y/n)" enter "y".
 
 ### Pareto Optimum Test
 
@@ -364,117 +364,117 @@ There are four options for finding Pareto optima:
 4. BFS and Boundary Triangular Region Pareto Search.
 
 #### Boundary Only: This will compute the boundary of the projected bases.
-            'matroidtest' will then output the Pareto optima that are contained
-            in the boundary.
+'matroidtest' will then output the Pareto optima that are contained
+in the boundary.
 
 #### Boundary Triangular Region Search: This follows the Boundary and 
-            Triangular Region Pareto Test heuristic described in our paper.
-            'matroidtest' will compute the boundary, find regions where the
-            remaining Pareto optima will be, then run the Pivot Heuristic using
-            either local search or tabu search to enumerate a subset of 
-            potential Pareto optima.
+Triangular Region Pareto Test heuristic described in our paper.
+'matroidtest' will compute the boundary, find regions where the
+remaining Pareto optima will be, then run the Pivot Heuristic using
+either local search or tabu search to enumerate a subset of 
+potential Pareto optima.
 
 #### BFS Pareto Search: This will perform Different Fiber BFS and from the
-            returned set, compute the Pareto optima. Note that these are only 
-            guaranteed to be Pareto optima of the points found by DFBFS, which
-            may not necessarily be Pareto optima of the original problem.
+returned set, compute the Pareto optima. Note that these are only 
+guaranteed to be Pareto optima of the points found by DFBFS, which
+may not necessarily be Pareto optima of the original problem.
 
 #### BFS and Boundary Triangular Region Pareto Search: This will perform
-            DFBFS and Boundary Triangular Region Search and combine the 
-            results.
+DFBFS and Boundary Triangular Region Search and combine the 
+results.
 
 ### Brute Force Enumeration:
 
-        'matroidtest' can also enumerate all projected bases using reverse search
-        when the matroid is graphical. This uses the algorithm of Matsui.
+'matroidtest' can also enumerate all projected bases using reverse search
+when the matroid is graphical. This uses the algorithm of Matsui.
 
 
 ## Executables contained in the MOCHA package
 
 - `alltoproj`
-    This file is meant to convert the output of findChildren printing all
-    spanning trees and project them by some given weighting.  Expects input to
-    be sets given by unsigned ints on each line.  First argument should be the
-    matrix that is our weighting.  The second argument should be the number of
-    elements in each set
+  This file is meant to convert the output of findChildren printing all
+  spanning trees and project them by some given weighting.  Expects input to
+  be sets given by unsigned ints on each line.  First argument should be the
+  matrix that is our weighting.  The second argument should be the number of
+  elements in each set
 
 - `designtomatrix`
-    This program will read in two matrices; a n x k exponent vector matrix B, 
-    a m x k design point matrix P
+  This program will read in two matrices; a n x k exponent vector matrix B, 
+  a m x k design point matrix P
 
-    It then computes A_ij := \prod_{h=1}^k P_{i,h}^B_{j,h} 
-    It reads in the matrices from standard input and prints the matrix to 
-    standard output
+  It then computes A_ij := \prod_{h=1}^k P_{i,h}^B_{j,h} 
+  It reads in the matrices from standard input and prints the matrix to 
+  standard output
 
 - `estimatebases`
-    This program estimates the number of bases of a matrix by assigning
-    random weights to each column of the matrix and finding the maximal
-    weight basis. This is done m times and the resulting average estimates
-    the function GAMMA. Then upper and lower bounds for the number of bases
-    are calculated.
+  This program estimates the number of bases of a matrix by assigning
+  random weights to each column of the matrix and finding the maximal
+  weight basis. This is done m times and the resulting average estimates
+  the function GAMMA. Then upper and lower bounds for the number of bases
+  are calculated.
 
 - `genmatrix`
-    Generates a random matrix. Useful for creating random examples.
-    run genmatrix for input format.
+  Generates a random matrix. Useful for creating random examples.
+  run genmatrix for input format.
 
 - `genrandmo`
-   This is an interactive program used to generate random Vector and Graph 
-   matroids along with random weightings.
+  This is an interactive program used to generate random Vector and Graph 
+  matroids along with random weightings.
 
 - `graphtest`
-    Program to check validity of some internal graph routines.
+  Program to check validity of some internal graph routines.
 
 - `localsearch`
-    Program to perform localsearch heuristic as described in our paper.
-    See explanation above for usage.
+  Program to perform localsearch heuristic as described in our paper.
+  See explanation above for usage.
 
 - `matroidtest`
-    The program 'matroidtest' has the capability of running the 
-    following algorithms: Different Fiber BFS, Pivot Test, Projected 
-    Boundary Calculation, Pareto Calculation, and Brute force 
-    projected bases calculation (Graphs only). See our paper for
-    a full description of these algorithms. 
+  The program 'matroidtest' has the capability of running the 
+  following algorithms: Different Fiber BFS, Pivot Test, Projected 
+  Boundary Calculation, Pareto Calculation, and Brute force 
+  projected bases calculation (Graphs only). See our paper for
+  a full description of these algorithms. 
 
 - `mvbalclust`
-    Non-linear matroid optimization can solve the problem of min variance
-    balanced clustering. The input is a file that is a matrix of
-    2k points in R^n^ which are to be partitioned into two sets of size
-    k such that the variance of their euclidean distances is minimized.
-    Input is a file with the following format.
-    ```
-    <Number of rows>
-    <Number of columns>
-    ```
-    followed by an appropriate row and column of numbers.
+  Non-linear matroid optimization can solve the problem of min variance
+  balanced clustering. The input is a file that is a matrix of
+  2k points in R^n^ which are to be partitioned into two sets of size
+  k such that the variance of their euclidean distances is minimized.
+  Input is a file with the following format.
+  ```
+  <Number of rows>
+  <Number of columns>
+  ```
+  followed by an appropriate row and column of numbers.
 
 - `nagibatest`
-    This program was written to test the our implementation of Matsui
-    and Nagamochi-Ibariki algorithms. The input is 
-    ```
-    ADJACENCY
-    <Number of rows>
-    <Number of columns>
-    ```
-    followed by an appropriate row and column of numbers.
-    The previous matrix is the adjacency representation of the graph.
+  This program was written to test the our implementation of Matsui
+  and Nagamochi-Ibariki algorithms. The input is 
+```
+ADJACENCY
+<Number of rows>
+<Number of columns>
+```
+  followed by an appropriate row and column of numbers.
+  The previous matrix is the adjacency representation of the graph.
 
-    nagibatest will enumerate all spanning trees and only print out
-    the total number of trees. The code can be modified easily
-    to print out all trees to stdout. Set "printTrees = 1;".
+  nagibatest will enumerate all spanning trees and only print out
+  the total number of trees. The code can be modified easily
+  to print out all trees to stdout. Set "printTrees = 1;".
 
 - point2po
-    This program reads in from stdin points, and finds the pareto optimum using 
-    a straightforward search
+  This program reads in from stdin points, and finds the pareto optimum using 
+  a straightforward search
 
 - tabusearch
-    Program to perform localsearch heuristic as described in our paper.
-    See explanation above for usage.
+  Program to perform localsearch heuristic as described in our paper.
+  See explanation above for usage.
 
 - testmatrix
-    Program to internally check matrix class.
+  Program to internally check matrix class.
 
 
 ## Data structures and code:
-    Effort was made to make the code legible and intuitive. The authors
-    hope to continue to add functionality and subroutines to many of
-    the objects. Others are welcome and encouraged to contribute! 
+Effort was made to make the code legible and intuitive. The authors
+hope to continue to add functionality and subroutines to many of
+the objects. Others are welcome and encouraged to contribute!
